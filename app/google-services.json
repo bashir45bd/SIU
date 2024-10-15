@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "747499013353",
+    "project_id": "siuedu-4ff66",
+    "storage_bucket": "siuedu-4ff66.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:747499013353:android:538caba5f27256a2fb1c78",
+        "android_client_info": {
+          "package_name": "com.eduhub.siu"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCai3RXhHHUv2YtFkVK9W5PC3hAa4DvEgY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
