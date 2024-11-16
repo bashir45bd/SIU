@@ -18,6 +18,7 @@
             android:layout_width="wrap_content"
             android:background="@color/bg"
             android:layout_height="wrap_content"
+            android:layout_above="@id/bottom_nav"
             android:visibility="visible"
             >
             <LinearLayout
@@ -63,22 +64,19 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:background="@drawable/white_bg">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Slider"
-                    android:textSize="@dimen/_20ssp"
-                    android:textColor="@color/color"
-                    android:gravity="center"
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/viewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
 
-                    android:fontFamily="@font/roboto"
                     />
+
+
 
             </RelativeLayout>
 
             <LinearLayout
                 android:layout_below="@+id/slider"
-                android:layout_above="@+id/his_nav"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
@@ -110,7 +108,7 @@
 
 
                             <androidx.cardview.widget.CardView
-                                android:id="@+id/cardview1"
+                                android:id="@+id/dep"
                                 android:layout_width="@dimen/_115sdp"
                                 android:layout_height="@dimen/_85sdp"
                                 android:backgroundTint="#ECECEC"
@@ -158,7 +156,7 @@
 
                             <androidx.cardview.widget.CardView
 
-                                android:id="@+id/cardview2"
+                                android:id="@+id/admin"
                                 android:layout_width="@dimen/_115sdp"
                                 android:layout_height="@dimen/_85sdp"
                                 android:layout_marginLeft="15dp"
@@ -217,7 +215,7 @@
 
 
                             <androidx.cardview.widget.CardView
-                                android:id="@+id/cardview3"
+                                android:id="@+id/admission"
                                 android:layout_width="@dimen/_115sdp"
                                 android:layout_height="@dimen/_85sdp"
                                 android:backgroundTint="#ECECEC"
@@ -264,7 +262,7 @@
                             </androidx.cardview.widget.CardView>
 
                             <androidx.cardview.widget.CardView
-                                android:id="@+id/cardview4"
+                                android:id="@+id/news"
                                 android:layout_width="@dimen/_115sdp"
                                 android:layout_height="@dimen/_85sdp"
                                 android:layout_marginLeft="15dp"
@@ -324,7 +322,7 @@
 
 
                             <androidx.cardview.widget.CardView
-                                android:id="@+id/cardview5"
+                                android:id="@+id/event"
                                 android:layout_width="@dimen/_115sdp"
                                 android:layout_height="@dimen/_85sdp"
                                 android:backgroundTint="#ECECEC"
@@ -370,7 +368,7 @@
                             </androidx.cardview.widget.CardView>
 
                             <androidx.cardview.widget.CardView
-                                android:id="@+id/cardview6"
+                                android:id="@+id/all_notice"
                                 android:layout_width="@dimen/_115sdp"
                                 android:layout_height="@dimen/_85sdp"
                                 android:layout_marginLeft="15dp"
@@ -473,7 +471,7 @@
                             </androidx.cardview.widget.CardView>
 
                             <androidx.cardview.widget.CardView
-                                android:id="@+id/cardview8"
+                                android:id="@+id/result1"
                                 android:layout_width="@dimen/_115sdp"
                                 android:layout_height="@dimen/_85sdp"
                                 android:layout_marginLeft="15dp"
@@ -530,25 +528,15 @@
 
             </LinearLayout>
 
-            <com.google.android.material.bottomnavigation.BottomNavigationView
-                android:id="@+id/his_nav"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:background="@color/color"
-                app:itemIconSize="@dimen/_22sdp"
-                app:itemIconTint="@color/color_bottom"
-                app:itemTextColor="@color/white"
-                app:labelVisibilityMode="labeled"
-                app:menu="@menu/bottom" />
 
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/two"
+            android:id="@+id/contact"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/bg"
+            android:layout_height="match_parent"
+            android:background="#3F51B5"
+            android:layout_above="@id/bottom_nav"
             android:visibility="gone"
             >
             <TextView
@@ -559,10 +547,11 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/contact"
+            android:id="@+id/website"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/bg"
+            android:layout_height="match_parent"
+            android:background="#009688"
+            android:layout_above="@id/bottom_nav"
             android:visibility="gone"
             >
             <TextView
@@ -572,6 +561,17 @@
                 android:text="3nd tab"/>
         </RelativeLayout>
 
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_nav"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/color"
+            app:itemIconSize="@dimen/_22sdp"
+            app:itemIconTint="@color/color_bottom"
+            app:itemTextColor="@color/white"
+            app:labelVisibilityMode="labeled"
+            app:menu="@menu/bottom" />
 
 
     </RelativeLayout>
