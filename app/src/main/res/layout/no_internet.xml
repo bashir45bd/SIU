@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/white_bg"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        >
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animationView"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_150sdp"
+            app:lottie_rawRes="@raw/no_internet"
+            app:lottie_autoPlay="true"
+            android:layout_gravity="center"
+            app:lottie_loop="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Uh-oh!"
+            android:textSize="@dimen/_18ssp"
+            android:textStyle="bold"
+            android:textColor="@color/color"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No internet connection detected.\n  Please check your connection."
+            android:textSize="@dimen/_15ssp"
+            android:textColor="@color/color"
+            android:fontFamily="@font/roboto"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/_5sdp"/>
+
+        <Button
+            android:id="@+id/close"
+            android:layout_width="@dimen/_180sdp"
+            android:layout_height="@dimen/_45sdp"
+            android:text="Try Again!"
+            android:textSize="@dimen/_18ssp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:clickable="true"
+            android:fontFamily="@font/roboto"
+            android:textStyle="bold"
+            android:foreground="?attr/selectableItemBackground"
+            />
+
+
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>

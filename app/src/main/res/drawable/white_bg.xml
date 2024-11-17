@@ -22,10 +22,10 @@
                 android:color="@color/white"
                 />
             <corners
-                android:bottomLeftRadius="@dimen/_8sdp"
-                android:bottomRightRadius="@dimen/_8sdp"
-                android:topRightRadius="@dimen/_8sdp"
-                android:topLeftRadius="@dimen/_8sdp"
+                android:bottomLeftRadius="@dimen/_7sdp"
+                android:bottomRightRadius="@dimen/_7sdp"
+                android:topRightRadius="@dimen/_7sdp"
+                android:topLeftRadius="@dimen/_7sdp"
                 />
 
 

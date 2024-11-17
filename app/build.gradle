@@ -41,10 +41,17 @@ dependencies {
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
 
+   //=========================silder=========================
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
     implementation 'com.google.android.material:material:1.9.0'
     implementation 'com.github.bumptech.glide:glide:4.15.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.15.1'
+
+    //=========================silder&map=========================
+
+    implementation 'com.google.android.gms:play-services-maps:18.0.0'
+
+   //=========================map=========================
 
     implementation 'com.google.firebase:firebase-analytics'
     implementation platform('com.google.firebase:firebase-bom:33.4.0')

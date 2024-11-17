@@ -13,37 +13,21 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center_vertical|center_horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_above="@id/animationView"
         android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="@dimen/_110sdp"
-            android:layout_height="@dimen/_110sdp"
-            android:src="@drawable/siu"
-            android:background="@drawable/circle"
-            android:scaleType="fitCenter"
-            android:padding="@dimen/_12sdp"
-           />
-
-
-
-
-        <TextView
-            android:id="@+id/bb"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sylhet\nInternational University"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_18sdp"
-            android:fontFamily="@font/font"
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottieAnimation"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:gravity="center"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:textStyle="bold"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/load4" />
 
-            />
+
 
 
 
