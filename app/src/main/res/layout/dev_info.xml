@@ -93,7 +93,7 @@
             android:textSize="@dimen/_20ssp"
             android:textColor="@color/white"
             android:layout_marginTop="@dimen/_15sdp"
-            android:background="@drawable/g_color"
+            android:background="@drawable/g_color2"
             android:paddingTop="@dimen/_5sdp"
             android:paddingBottom="@dimen/_5sdp"
             android:paddingRight="@dimen/_10sdp"

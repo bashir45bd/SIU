@@ -38,7 +38,7 @@
                 android:gravity="center"
                 android:fontFamily="@font/roboto"
                 android:text="Events"
-                android:layout_marginLeft="@dimen/_15sdp"
+                android:layout_marginLeft="@dimen/_5sdp"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_17ssp"
                 android:textStyle="bold" />
@@ -78,7 +78,7 @@
                 android:gravity="center"
                 android:fontFamily="@font/roboto"
                 android:text="All Notice"
-                android:layout_marginLeft="@dimen/_15sdp"
+                android:layout_marginLeft="@dimen/_5sdp"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_17ssp"
                 android:textStyle="bold" />
@@ -118,7 +118,7 @@
                 android:gravity="center"
                 android:fontFamily="@font/roboto"
                 android:text="News"
-                android:layout_marginLeft="@dimen/_15sdp"
+                android:layout_marginLeft="@dimen/_5sdp"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_17ssp"
                 android:textStyle="bold" />
@@ -157,8 +157,8 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:fontFamily="@font/roboto"
-                android:text="Authority"
-                android:layout_marginLeft="@dimen/_15sdp"
+                android:text="Result"
+                android:layout_marginLeft="@dimen/_5sdp"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_17ssp"
                 android:textStyle="bold" />
