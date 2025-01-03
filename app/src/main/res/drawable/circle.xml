@@ -5,11 +5,13 @@
 
 
     <solid
-        android:color="@color/white"
+        android:color="#54FFFFFF"
         />
 
     <size
         android:width="@dimen/_100sdp"
         android:height="@dimen/_100sdp"
         />
+
+
 </shape>

@@ -5,7 +5,7 @@
     android:id="@+id/drawer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg"
+    android:background="@drawable/home1"
     tools:openDrawer="star"
     tools:context=".MainActivity">
 
@@ -17,7 +17,6 @@
         <RelativeLayout
             android:id="@+id/home"
             android:layout_width="wrap_content"
-            android:background="@color/bg"
             android:layout_height="wrap_content"
             android:layout_above="@id/bottom_nav"
             android:visibility="visible"
@@ -37,7 +36,7 @@
                         android:background="@color/color"
                         app:navigationIcon="@drawable/menu_open_24"
                         app:navigationIconTint="@color/white"
-                        app:title="Sylhet International University"
+                        app:title="@string/appfullname"
                         app:titleTextColor="@color/white"
                         />
                 </com.google.android.material.appbar.AppBarLayout>
@@ -46,7 +45,7 @@
             <RelativeLayout
                 android:id="@+id/note"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="1dp"
                 android:layout_below="@+id/bar"
                 android:background="@drawable/corved">
 
@@ -56,13 +55,13 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/slider"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_135sdp"
+                android:layout_height="@dimen/_145sdp"
                 android:layout_marginLeft="@dimen/_20sdp"
                 android:layout_marginRight="@dimen/_20sdp"
                 android:layout_below="@+id/bar"
                 android:elevation="@dimen/_10sdp"
                 android:gravity="center"
-                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_3sdp"
                 app:cardCornerRadius="@dimen/_7sdp"
                 >
                 <LinearLayout
@@ -71,14 +70,16 @@
                     android:orientation="horizontal"
                     android:background="@drawable/g_color"
                     >
+
+
                     <com.airbnb.lottie.LottieAnimationView
                         android:layout_width="@dimen/_140sdp"
                         android:layout_height="@dimen/_130sdp"
                         android:layout_gravity="center"
-                        app:lottie_autoPlay="true"
                         android:layout_marginTop="@dimen/_5sdp"
+                        app:lottie_autoPlay="true"
                         app:lottie_loop="true"
-                        app:lottie_rawRes="@raw/homeanim" />
+                        app:lottie_rawRes="@raw/anim" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -94,7 +95,7 @@
                             android:textSize="@dimen/_15ssp"
                             android:textStyle="bold"
                             android:gravity="start"
-                            android:layout_marginTop="@dimen/_26sdp"
+                            android:layout_marginTop="@dimen/_35sdp"
                             android:fontFamily="@font/roboto"/>
 
                         <TextView
@@ -125,14 +126,14 @@
                 android:id="@+id/text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Features"
+                android:text="Key Features"
                 android:textStyle="bold"
                 android:textSize="@dimen/_14ssp"
                 android:textColor="@color/color"
-                android:fontFamily="@font/roboto"
+                android:fontFamily="@font/font"
                 android:layout_below="@+id/slider"
                 android:layout_marginLeft="@dimen/_22sdp"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_20sdp"
                 android:gravity="start"
                 />
 
@@ -144,7 +145,7 @@
                 android:layout_marginLeft="@dimen/_20sdp"
                 android:layout_marginRight="@dimen/_20sdp"
                 android:layout_below="@+id/text"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginBottom="@dimen/_10sdp"
                 android:elevation="@dimen/_5sdp"
                 android:orientation="vertical">
@@ -154,13 +155,12 @@
                 <ScrollView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
+                    android:scrollbars="none"
                     >
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/white_bg"
                         android:orientation="vertical">
 
                         <LinearLayout
@@ -220,8 +220,7 @@
                             </androidx.cardview.widget.CardView>
 
                             <androidx.cardview.widget.CardView
-
-                                android:id="@+id/admin"
+                                android:id="@+id/all_notice"
                                 android:layout_width="@dimen/_110sdp"
                                 android:layout_height="@dimen/_75sdp"
                                 android:layout_marginLeft="15dp"
@@ -229,15 +228,14 @@
                                 android:clickable="true"
                                 android:foreground="?attr/selectableItemBackground"
                                 app:cardCornerRadius="@dimen/_7sdp"
-
                                 >
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_gravity="center"
-                                    android:orientation="vertical"
                                     android:gravity="center"
+                                    android:orientation="vertical"
                                     android:background="@drawable/g_color3"
                                     >
 
@@ -246,20 +244,19 @@
                                         android:layout_height="@dimen/_45sdp"
                                         android:layout_gravity="center"
                                         android:scaleType="centerCrop"
-                                        android:src="@drawable/admini"
-                                        android:tint="@color/white"
+                                        android:src="@drawable/notice"
                                         android:layout_marginTop="@dimen/_2sdp"
-                                        />
+                                        app:tint="@color/white" />
 
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center"
-                                        android:layout_marginTop="@dimen/_3sdp"
-                                        android:text="Administration"
+                                        android:text="All Notice"
                                         android:fontFamily="@font/roboto"
+                                        android:layout_marginTop="@dimen/_3sdp"
                                         android:textColor="@color/white"
-                                        android:textSize="@dimen/_13ssp"
+                                        android:textSize="@dimen/_14ssp"
                                         android:textStyle="bold" />
 
 
@@ -420,10 +417,11 @@
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center"
                                         android:layout_marginTop="@dimen/_3sdp"
-                                        android:text="Events"
+                                        android:text="News/Events"
+                                        android:padding="@dimen/_3sdp"
                                         android:fontFamily="@font/roboto"
                                         android:textColor="@color/white"
-                                        android:textSize="@dimen/_14ssp"
+                                        android:textSize="@dimen/_12ssp"
                                         android:textStyle="bold" />
 
 
@@ -433,7 +431,8 @@
                             </androidx.cardview.widget.CardView>
 
                             <androidx.cardview.widget.CardView
-                                android:id="@+id/all_notice"
+
+                                android:id="@+id/admin"
                                 android:layout_width="@dimen/_110sdp"
                                 android:layout_height="@dimen/_75sdp"
                                 android:layout_marginLeft="15dp"
@@ -441,14 +440,15 @@
                                 android:clickable="true"
                                 android:foreground="?attr/selectableItemBackground"
                                 app:cardCornerRadius="@dimen/_7sdp"
+
                                 >
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_gravity="center"
-                                    android:gravity="center"
                                     android:orientation="vertical"
+                                    android:gravity="center"
                                     android:background="@drawable/g_color6"
                                     >
 
@@ -457,19 +457,20 @@
                                         android:layout_height="@dimen/_45sdp"
                                         android:layout_gravity="center"
                                         android:scaleType="centerCrop"
-                                        android:src="@drawable/notice"
+                                        android:src="@drawable/admini"
+                                        android:tint="@color/white"
                                         android:layout_marginTop="@dimen/_2sdp"
-                                        app:tint="@color/white" />
+                                        />
 
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center"
-                                        android:text="All Notice"
-                                        android:fontFamily="@font/roboto"
                                         android:layout_marginTop="@dimen/_3sdp"
+                                        android:text="Administration"
+                                        android:fontFamily="@font/roboto"
                                         android:textColor="@color/white"
-                                        android:textSize="@dimen/_14ssp"
+                                        android:textSize="@dimen/_13ssp"
                                         android:textStyle="bold" />
 
 
@@ -491,7 +492,7 @@
 
 
                             <androidx.cardview.widget.CardView
-                                android:id="@+id/news"
+                                android:id="@+id/epayment"
                                 android:layout_width="@dimen/_110sdp"
                                 android:layout_height="@dimen/_75sdp"
                                 android:backgroundTint="#ECECEC"
@@ -515,15 +516,16 @@
                                         android:layout_height="@dimen/_45sdp"
                                         android:layout_gravity="center"
                                         android:scaleType="centerCrop"
-                                        android:src="@drawable/news"
-                                        android:layout_marginTop="@dimen/_2sdp"
+                                        android:src="@drawable/payment"
+                                        android:padding="@dimen/_2sdp"
+                                        android:layout_marginTop="@dimen/_3sdp"
                                         app:tint="@color/white" />
 
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center"
-                                        android:text="News"
+                                        android:text="E-Payment"
                                         android:textColor="@color/white"
                                         android:fontFamily="@font/roboto"
                                         android:layout_marginTop="@dimen/_3sdp"

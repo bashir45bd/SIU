@@ -4,4 +4,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="color">#009fb5</color>
     <color name="bg">#fef7ff</color>
+    <color name="trans">#00FFFFFF</color>
 </resources>

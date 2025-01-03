@@ -19,7 +19,7 @@
         android:text="fklhjkfhjjhfg"
         android:gravity="center"
         android:fontFamily="@font/font"
-        android:background="#E14D7F84"
+        android:background="#9D4D7F84"
         android:textColor="#FFFFFF"
         android:paddingTop="@dimen/_4sdp"
         android:paddingBottom="@dimen/_6sdp"
