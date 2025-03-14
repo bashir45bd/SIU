@@ -71,6 +71,12 @@
                     android:icon="@drawable/more_24"
                     android:title="More App"
                     />
+
+                <item
+                    android:id="@+id/logout"
+                    android:icon="@drawable/logout_24"
+                    android:title="Logout"
+                    />
             </menu>
 
         </item>

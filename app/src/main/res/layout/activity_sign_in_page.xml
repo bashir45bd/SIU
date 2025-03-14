@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/white"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginRight="@dimen/_18sdp"
+        android:layout_marginLeft="@dimen/_18sdp"
+        android:gravity="center">
+
+        <!-- Welcome Text -->
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="@dimen/_160sdp"
+            android:layout_height="@dimen/_150sdp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_25sdp"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/signinanim"
+           />
+
+        <TextView
+            android:id="@+id/tvWelcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome Back!"
+            android:textSize="@dimen/_23ssp"
+            android:textStyle="bold"
+            android:textColor="@color/color"
+            android:layout_gravity="center"
+            android:fontFamily="@font/font"
+            />
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Login to your account"
+            android:textSize="@dimen/_12ssp"
+            android:textColor="@color/color"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:clickable="true"
+            android:fontFamily="@font/roboto"
+            android:layout_marginBottom="20dp"
+            android:focusable="true" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/ThemeOverlay.Material3.AutoCompleteTextView"
+            android:hint="E-mail"
+            android:layout_margin="@dimen/_8sdp"
+            app:endIconMode="clear_text"
+            android:textColorHint="#625E5E"
+            app:boxBackgroundColor="#FAFAFA"
+            app:startIconDrawable="@drawable/email_24"
+            app:startIconTint="@color/color"
+            app:boxCornerRadiusTopStart="25dp"
+            app:boxCornerRadiusTopEnd="25dp"
+            app:boxCornerRadiusBottomStart="25dp"
+            app:boxCornerRadiusBottomEnd="25dp"
+
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:maxLength="50"
+                android:textColor="@color/color"
+                android:textSize="@dimen/_12ssp" />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/ThemeOverlay.Material3.AutoCompleteTextView"
+            android:hint="Password"
+            android:textColorHint="#625E5E"
+            android:layout_margin="@dimen/_8sdp"
+            app:endIconMode="password_toggle"
+            app:boxBackgroundColor="#FAFAFA"
+            app:startIconDrawable="@drawable/password"
+            app:startIconTint="@color/color"
+            app:boxCornerRadiusTopStart="25dp"
+            app:boxCornerRadiusTopEnd="25dp"
+            app:boxCornerRadiusBottomStart="25dp"
+            app:boxCornerRadiusBottomEnd="25dp"
+
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:maxLength="40"
+                android:textColor="@color/color"
+                android:textSize="@dimen/_12ssp" />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Sign In Button -->
+        <Button
+            android:id="@+id/btnSignIn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_45sdp"
+            android:text="Sign In"
+            android:textSize="@dimen/_16ssp"
+            android:fontFamily="@font/font"
+            android:textColor="@android:color/white"
+            android:backgroundTint="@color/color"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:layout_marginLeft="@dimen/_8sdp"
+            android:layout_marginRight="@dimen/_8sdp"
+            android:layout_marginTop="10dp" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:paddingBottom="@dimen/_20sdp"
+
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Don't have an account?"
+                android:textSize="@dimen/_14ssp"
+                android:textColor="@color/color"
+                android:layout_gravity="center"
+                android:fontFamily="@font/roboto"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:focusable="true" />
+            <TextView
+                android:id="@+id/move_to_signup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:text="Sign Up"
+                android:textSize="@dimen/_14ssp"
+                android:textColor="@color/color"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:layout_marginLeft="@dimen/_3sdp"
+                android:fontFamily="@font/roboto"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:focusable="true" />
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_250sdp"/>
+
+    </LinearLayout>
+
+</ScrollView>

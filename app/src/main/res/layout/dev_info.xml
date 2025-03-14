@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/dev_bg"
     >
 
     <LinearLayout
@@ -11,7 +12,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center"
-        android:background="@drawable/dev_bg"
         >
 
         <LinearLayout
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:text="Bashir Ahmed"
             android:textSize="@dimen/_20ssp"
-            android:textColor="@color/white"
+            android:textColor="@color/color"
             android:textStyle="bold"
             android:fontFamily="@font/font"
             android:layout_marginTop="@dimen/_5sdp"
@@ -59,14 +59,14 @@
             android:layout_width="@dimen/_180sdp"
             android:layout_height="@dimen/_3sdp"
             android:layout_gravity="center"
-            android:background="@drawable/white_bg"/>
+            android:background="@color/color"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Android developer"
             android:textSize="@dimen/_12ssp"
-            android:textColor="@color/white"
+            android:textColor="@color/color"
             android:textStyle="bold"
             android:fontFamily="@font/roboto"
             android:layout_marginBottom="@dimen/_12sdp"
@@ -81,7 +81,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@color/bg"
         android:gravity="center"
         >
         <TextView
@@ -90,14 +89,14 @@
             android:text="Contact"
             android:textStyle="bold"
             android:fontFamily="@font/roboto"
-            android:textSize="@dimen/_20ssp"
+            android:textSize="@dimen/_18ssp"
             android:textColor="@color/white"
             android:layout_marginTop="@dimen/_15sdp"
-            android:background="@drawable/g_color2"
+            android:background="@drawable/colorbg"
             android:paddingTop="@dimen/_5sdp"
             android:paddingBottom="@dimen/_5sdp"
-            android:paddingRight="@dimen/_10sdp"
-            android:paddingStart="@dimen/_10sdp"
+            android:paddingRight="@dimen/_14sdp"
+            android:paddingStart="@dimen/_14sdp"
             />
 
 

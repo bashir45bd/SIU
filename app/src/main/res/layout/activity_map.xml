@@ -12,6 +12,7 @@
         android:layout_height="match_parent"
         android:visibility="gone"
         android:id="@+id/mappage"
+
         >
 
         <RelativeLayout
@@ -368,7 +369,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_43sdp"
                 android:orientation="horizontal"
-                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_3sdp"
 
                 >
 
@@ -495,14 +496,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"
-        android:background="@color/color"
         android:id="@+id/noticeshow">
+
+
 
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:background="@color/color"
-            android:layout_marginTop="@dimen/_20sdp"
             android:layout_height="wrap_content">
 
             <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -528,9 +529,11 @@
                         app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
                         app:toolbarId="@+id/toolbar">
 
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_3sdp"
                             android:orientation="vertical">
 
                             <LinearLayout
@@ -542,14 +545,13 @@
                                 android:orientation="vertical">
 
                                 <ImageView
-                                    android:layout_height="@dimen/_240sdp"
+                                    android:layout_height="@dimen/_230sdp"
                                     android:layout_width="match_parent"
                                     android:id="@+id/notice_pic2"
                                     android:src="@drawable/pic"
                                     android:layout_margin="@dimen/_5sdp"
                                     android:layout_gravity="center"
                                     android:scaleType="fitCenter"
-                                    android:layout_marginTop="@dimen/_10sdp"
                                     android:layout_marginBottom="@dimen/_10sdp"
                                     android:layout_alignParentTop="true"
                                     android:layout_centerHorizontal="true"/>
@@ -564,6 +566,70 @@
                             </LinearLayout>
 
                         </LinearLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            >
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/up_card"
+                                android:layout_width="45dp"
+                                android:layout_height="45dp"
+                                android:elevation="12dp"
+                                android:layout_alignParentEnd="true"
+                                app:cardCornerRadius="75dp"
+                                android:layout_marginRight="@dimen/_5sdp"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:shape="ring"
+                                android:backgroundTint="#009688"
+                                android:thicknessRatio="1.9">
+
+                                <ImageView
+                                    android:layout_height="45dp"
+                                    android:layout_width="match_parent"
+                                    android:id="@+id/update"
+                                    android:padding="@dimen/_8sdp"
+                                    android:src="@drawable/id"
+                                    android:clickable="true"
+                                    android:foreground="?selectableItemBackground"
+                                    android:tint="@color/white"
+                                    android:layout_gravity="center"
+                                    android:scaleType="centerCrop"
+                                    android:layout_centerHorizontal="true"/>
+
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/de_card"
+                                android:layout_width="45dp"
+                                android:layout_height="45dp"
+                                android:elevation="12dp"
+                                android:clickable="true"
+                                android:foreground="?selectableItemBackground"
+                                android:layout_alignParentEnd="true"
+                                app:cardCornerRadius="75dp"
+                                android:layout_marginRight="@dimen/_5sdp"
+                                android:layout_marginTop="@dimen/_50sdp"
+                                android:shape="ring"
+                                android:backgroundTint="#009688"
+                                android:thicknessRatio="1.9">
+
+                                <ImageView
+                                    android:layout_height="45dp"
+                                    android:layout_width="match_parent"
+                                    android:id="@+id/delete"
+                                    android:padding="@dimen/_8sdp"
+                                    android:src="@drawable/delete_outline_24"
+                                    android:tint="@color/white"
+                                    android:layout_gravity="center"
+                                    android:scaleType="centerCrop"
+                                    android:layout_centerHorizontal="true"/>
+
+                            </androidx.cardview.widget.CardView>
+
+                        </RelativeLayout>
+
+
 
 
                     </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -587,21 +653,20 @@
                             android:id="@+id/show_notice"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-                            android:textSize="@dimen/_15ssp"
-                            android:enabled="true"
                             android:layout_gravity="center"
-                            android:gravity="start"
-                            android:textStyle="bold"
+                            android:enabled="true"
                             android:focusable="true"
-                            android:longClickable="true"
-                            android:scrollbars="vertical"
-                            android:textIsSelectable="true"
-                            android:textColor="#000000"
-                            android:padding="@dimen/_15sdp"
-                            android:justificationMode="inter_word"
                             android:fontFamily="@font/kalpurush"
-                            />
+                            android:gravity="start"
+                            android:justificationMode="inter_word"
+                            android:longClickable="true"
+                            android:padding="@dimen/_15sdp"
+                            android:scrollbars="vertical"
+                            android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+                            android:textColor="#000000"
+                            android:textIsSelectable="true"
+                            android:textSize="@dimen/_14ssp"
+                            android:textStyle="bold" />
 
                     </LinearLayout>
 

@@ -43,7 +43,7 @@
                     android:layout_centerHorizontal="true"
                     android:background="@drawable/circle"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/pic" />
+                    android:src="@drawable/placeholder" />
 
             </androidx.cardview.widget.CardView>
 

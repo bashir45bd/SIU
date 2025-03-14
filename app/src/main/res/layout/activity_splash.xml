@@ -27,10 +27,6 @@
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/load4" />
 
-
-
-
-
     </LinearLayout>
 
 
@@ -41,9 +37,9 @@
         app:lottie_autoPlay="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/load" />
+
 <LinearLayout
     android:id="@+id/aa"
     android:layout_width="match_parent"

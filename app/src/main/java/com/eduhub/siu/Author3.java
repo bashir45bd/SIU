@@ -20,6 +20,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,8 +33,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 
 public class Author3 extends Fragment {
@@ -44,51 +54,7 @@ public class Author3 extends Fragment {
 
         recyclerView=view.findViewById(R.id.list);
 
-
-
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("academic");
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-
-                    String title = snapshot.child("title").getValue(String.class);
-                    String name = snapshot.child("name").getValue(String.class);
-                    String pic = snapshot.child("pic").getValue(String.class);
-                    String mail = snapshot.child("email").getValue(String.class);
-                    String number = snapshot.child("number").getValue(String.class);
-                    String des = snapshot.child("des").getValue(String.class);
-                    String fblink = snapshot.child("fblink").getValue(String.class);
-
-
-
-                    hashMap= new HashMap<>();
-                    hashMap.put("atitle",title);
-                    hashMap.put("aname",name);
-                    hashMap.put("apic",pic);
-                    hashMap.put("amail",mail);
-                    hashMap.put("anumber",number);
-                    hashMap.put("ades",des);
-                    hashMap.put("fblink",fblink);
-                    arrayList.add(hashMap);
-
-
-                }
-
-                Author3.trust_list adapter = new Author3.trust_list();
-                recyclerView.setAdapter(adapter);
-                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-
-                Log.w("MainActivity", "Failed to read value.", error.toException());
-            }
-        });
+        academic();
 
 
 
@@ -216,6 +182,66 @@ public class Author3 extends Fragment {
 
 
 
+    }
+
+    private void academic() {
+
+        String URL = "http://192.168.1.104/SIU/Alldata.json";
+        RequestQueue queue = Volley.newRequestQueue(getContext());
+
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, URL, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        try {
+                            JSONObject trustSiu = response.getJSONObject("academic");
+
+                            Iterator<String> keys = trustSiu.keys();
+
+                            while (keys.hasNext()) {
+                                String key = keys.next();
+                                JSONObject person = trustSiu.getJSONObject(key);
+
+                                String name = person.getString("name");
+                                String title = person.getString("title");
+                                String email = person.getString("email");
+                                String pic = person.getString("pic");
+                                String number = person.getString("number");
+                                String des = person.getString("des");
+                                String fblink = person.getString("fblink");
+
+                                hashMap= new HashMap<>();
+                                hashMap.put("atitle",title);
+                                hashMap.put("aname",name);
+                                hashMap.put("apic",pic);
+                                hashMap.put("amail",email);
+                                hashMap.put("anumber",number);
+                                hashMap.put("ades",des);
+                                hashMap.put("fblink",fblink);
+                                arrayList.add(hashMap);
+
+
+                            }
+
+                            Author3.trust_list adapter = new Author3.trust_list();
+                            recyclerView.setAdapter(adapter);
+                            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("Volley Error", error.toString());
+            }
+        });
+
+        queue.add(request);
     }
 
 }

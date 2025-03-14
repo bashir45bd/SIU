@@ -4,8 +4,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
@@ -15,6 +18,7 @@ public class Author_all extends AppCompatActivity {
 
     RelativeLayout dep,admin,admi,author;
     ImageView depback,adminback,admiback,authorback;
+    CardView cse,ece,law,bba,english;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +29,11 @@ public class Author_all extends AppCompatActivity {
         admin=findViewById(R.id.admini);
         admi=findViewById(R.id.admi);
         author=findViewById(R.id.author);
+        cse=findViewById(R.id.cse);
+        ece=findViewById(R.id.ece);
+        law=findViewById(R.id.law);
+        bba=findViewById(R.id.bba);
+        english=findViewById(R.id.english);
 
         depback=findViewById(R.id.depback);
         adminback=findViewById(R.id.adminiback);
@@ -46,6 +55,25 @@ public class Author_all extends AppCompatActivity {
 
         if(val==1) {
             dep.setVisibility(View.VISIBLE);
+
+            cse.setOnClickListener(v -> {
+                Toast.makeText(Author_all.this,"Up Coming",Toast.LENGTH_LONG).show();
+            });
+
+            ece.setOnClickListener(v -> {
+                Toast.makeText(Author_all.this,"Up Coming",Toast.LENGTH_LONG).show();
+            });
+            law.setOnClickListener(v -> {
+                Toast.makeText(Author_all.this,"Up Coming",Toast.LENGTH_LONG).show();
+            });
+            english.setOnClickListener(v -> {
+                Toast.makeText(Author_all.this,"Up Coming",Toast.LENGTH_LONG).show();
+            });
+            bba.setOnClickListener(v -> {
+                Toast.makeText(Author_all.this,"Up Coming",Toast.LENGTH_LONG).show();
+            });
+
+
 
         }
         else if(val==2) {

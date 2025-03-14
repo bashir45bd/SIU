@@ -366,7 +366,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="ENGISH"
+                            android:text="ENGLISH"
                             android:fontFamily="@font/font"
                             android:textColor="@color/white"
                             android:textSize="@dimen/_20ssp"
@@ -375,7 +375,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="Department Of  Engkish"
+                            android:text="Department Of English"
                             android:fontFamily="@font/roboto"
                             android:textColor="@color/white"
                             android:textSize="@dimen/_13ssp"
@@ -604,6 +604,7 @@
         android:id="@+id/admi"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/bg"
         android:visibility="gone"
         >
         <LinearLayout
@@ -638,6 +639,18 @@
 
 
         </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Up Coming"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:textStyle="bold"
+            android:textSize="@dimen/_15ssp"
+            android:textColor="@color/color"/>
+
+
     </RelativeLayout>
 
     <RelativeLayout

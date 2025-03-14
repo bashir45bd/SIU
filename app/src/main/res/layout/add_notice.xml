@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/dev_bg"
+    tools:context=".Profile">
+
+
+    <View
+        android:id="@+id/aa"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_3sdp"
+        android:background="#5F5F5F"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_centerHorizontal="true"/>
+
+
+
+    <ScrollView
+        android:layout_below="@+id/aa"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:background="@color/white">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_18sdp"
+            android:layout_marginLeft="@dimen/_18sdp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/qq"
+                    android:layout_width="300dp"
+                    android:layout_height="200dp"
+                    android:elevation="12dp"
+                    app:cardCornerRadius="5dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:shape="ring"
+                    android:thicknessRatio="1.9">
+
+                    <ImageView
+                        android:layout_height="200dp"
+                        android:layout_width="match_parent"
+                        android:id="@+id/n_image"
+                        android:src="@drawable/placeholder"
+                        android:scaleType="centerCrop"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"/>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:elevation="12dp"
+                    app:cardCornerRadius="75dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginRight="@dimen/_30sdp"
+                    android:shape="ring"
+                    android:backgroundTint="#F8F8F8"
+                    android:thicknessRatio="1.9">
+
+                    <ImageView
+                        android:layout_height="50dp"
+                        android:layout_width="match_parent"
+                        android:id="@+id/select_image"
+                        android:padding="@dimen/_8sdp"
+                        android:src="@drawable/camera_alt_24"
+                        android:clickable="true"
+                        android:layout_gravity="center"
+                        android:foreground="?selectableItemBackground"
+                        android:scaleType="centerCrop"
+                        android:layout_centerHorizontal="true"/>
+
+                </androidx.cardview.widget.CardView>
+
+
+            </RelativeLayout>
+
+
+
+
+            <LinearLayout
+                android:id="@+id/u_student"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible"
+                >
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/ThemeOverlay.Material3.AutoCompleteTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_8sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:hint="title"
+                    android:textColorHint="#625E5E"
+                    app:boxBackgroundColor="#FAFAFA"
+                    app:boxCornerRadiusBottomStart="7dp"
+                    app:boxCornerRadiusTopEnd="7dp"
+                    app:boxCornerRadiusTopStart="7dp"
+                    app:endIconMode="clear_text"
+                    app:startIconTint="@color/color"
+
+                    >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/n_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:maxLength="500"
+                        android:textColor="@color/color"
+                        android:textSize="@dimen/_12ssp" />
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/ThemeOverlay.Material3.AutoCompleteTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_200sdp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:hint="Notice"
+                    android:textColorHint="#625E5E"
+                    app:boxBackgroundColor="#FAFAFA"
+                    app:boxCornerRadiusBottomEnd="7dp"
+                    app:boxCornerRadiusBottomStart="7dp"
+                    app:boxCornerRadiusTopEnd="7dp"
+                    app:boxCornerRadiusTopStart="7dp"
+                    app:endIconMode="clear_text"
+                    app:startIconTint="@color/color"
+                    android:layout_marginBottom="@dimen/_5sdp"
+
+                    >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/n_body"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_195sdp"
+                        android:gravity="start"
+                        android:inputType="textMultiLine"
+                        android:maxLength="2000"
+                        android:textColor="@color/color"
+                        android:textSize="@dimen/_12ssp" />
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:id="@+id/n_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_45sdp"
+                    android:layout_marginTop="30dp"
+                    android:backgroundTint="@color/color"
+                    android:fontFamily="@font/roboto"
+                    android:gravity="center"
+                    android:text="Submit"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_16ssp"
+                    android:textStyle="bold" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_100sdp"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</RelativeLayout>
