@@ -29,5 +29,3 @@ View your academic results instantly and securely with an easy-to-use result-che
 
 ![Extul_cover](https://github.com/user-attachments/assets/81182913-9bb8-4292-8161-7bb41913d805)
 
-PHP CODE
-https://drive.google.com/drive/folders/1sHCfxPLN7vexg1s4uce-oei6k_wdxoCi?usp=sharing
