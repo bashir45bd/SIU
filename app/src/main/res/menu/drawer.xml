@@ -15,6 +15,12 @@
                     android:title="The Chancellor and Vice Chancellor"
                     />
 
+                <item
+                    android:id="@+id/website"
+                    android:icon="@drawable/web"
+                    android:title="Website"
+                    />
+
 
             </menu>
 

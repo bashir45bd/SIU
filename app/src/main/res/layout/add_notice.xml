@@ -127,7 +127,7 @@
                         android:layout_height="wrap_content"
                         android:inputType="text"
                         android:maxLength="500"
-                        android:textColor="@color/color"
+                        android:textColor="#242424"
                         android:textSize="@dimen/_12ssp" />
 
 
@@ -157,10 +157,10 @@
                         android:id="@+id/n_body"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_195sdp"
-                        android:gravity="start"
+                        android:gravity="top"
                         android:inputType="textMultiLine"
                         android:maxLength="2000"
-                        android:textColor="@color/color"
+                        android:textColor="#242424"
                         android:textSize="@dimen/_12ssp" />
 
 

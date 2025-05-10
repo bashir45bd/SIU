@@ -1,32 +1,22 @@
 package com.eduhub.siu;
-
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Base64;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.textfield.TextInputEditText;
-
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,7 +24,7 @@ import java.util.Map;
 public class SignInPage extends AppCompatActivity {
 
 
-    TextView move_to_signup;
+    TextView move_to_signup,forgetpass;
     Button btnSignIn;
     TextInputEditText s_email, s_password;
 
@@ -46,9 +36,12 @@ public class SignInPage extends AppCompatActivity {
         setContentView(R.layout.activity_sign_in_page);
 
         move_to_signup = findViewById(R.id.move_to_signup);
+        forgetpass = findViewById(R.id.forgetpass);
         btnSignIn = findViewById(R.id.btnSignIn);
         s_email = findViewById(R.id.email);
         s_password = findViewById(R.id.password);
+
+
 
 
         btnSignIn.setOnClickListener(view -> {
@@ -62,7 +55,8 @@ public class SignInPage extends AppCompatActivity {
                 StringRequest(mail,pass);
 
 
-            } else {
+            }
+            else {
 
 
                 new AlertDialog.Builder(SignInPage.this)
@@ -84,87 +78,38 @@ public class SignInPage extends AppCompatActivity {
 
         move_to_signup.setOnClickListener(view -> {
 
-            Intent myIntent = new Intent(SignInPage.this, SignupPage.class);
-            startActivity(myIntent);
-            finish();
+            Intent nextActivity = new Intent(SignInPage.this,SignupPage.class);
+            Bundle bundle = new Bundle();
+            bundle.putInt("VAL", 112);
+            nextActivity.putExtras(bundle);
+            startActivity(nextActivity);
+
+        });
+
+        forgetpass.setOnClickListener(view -> {
+
+            String mail = s_email.getText().toString();
+            setForgetpass(mail);
+
         });
 
     }
 
-    private void ArrayRequest(String mail, String pass) {
-
-        String url = "http://192.168.1.105/SIU/ArrryRequest.php"; // Replace with your API URL
-        // Creating JSON Array
-        JSONArray jsonArray = new JSONArray();
-        try {
-            JSONObject user1 = new JSONObject();
-            user1.put("email", mail);
-            user1.put("pass", pass);
-            user1.put("key", "2021");
-
-//            JSONObject user2 = new JSONObject();
-//            user2.put("name", "John Doe");
-//            user2.put("email", "john@example.com");
-
-            jsonArray.put(user1);
-            //jsonArray.put(user2);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        // Creating JSON Array Request (POST)
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
-                Request.Method.POST, url, jsonArray,
-                response -> {
-
-                    for (int x = 0; x < response.length(); x++) {
-
-                        Toast.makeText(this, "" + response, Toast.LENGTH_SHORT).show();
-
-
-//                        try {
-//                            JSONArray json = response.getJSONArray(x);
-//                            JSONObject object= json.getJSONObject(0);
-//                            String title = object.getString("title");
-//                            String  video_id = object.getString("video_id");
-//
-//
-//                            new AlertDialog.Builder(SignInPage.this)
-//                                    .setTitle(title)
-//                                    .setMessage(video_id)
-//                                    .setNegativeButton("Thank You!", new DialogInterface.OnClickListener() {
-//                                        @Override
-//                                        public void onClick(DialogInterface dialog, int which) {
-//                                            dialog.dismiss();
-//                                        }
-//                                    })
-//                                    .show();
-//
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-                    }
-
-                },
-                error -> {
-                    // Handle error
-                    Toast.makeText(this, "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                });
-
-        // Adding request to Volley queue
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(jsonArrayRequest);
-    }
 
     private void StringRequest(String mail, String pass) {
-
-
-        String url = "http://192.168.1.104/SIU/login.php";
+        String url = "http://192.168.1.106/SIU/login.php";
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
+
+        // Create a ProgressDialog
+        ProgressDialog progressDialog = new ProgressDialog(SignInPage.this);
+        progressDialog.setMessage("Loading...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
 
         StringRequest postRequest = new StringRequest(Request.Method.POST, url,
                 response -> {
+                    progressDialog.dismiss();
 
                     if (response.contains("login")) {
 
@@ -173,47 +118,95 @@ public class SignInPage extends AppCompatActivity {
                         editor.putString("email", mail);
                         editor.apply();
 
-                        //Code here
+
                         Intent myIntent = new Intent(SignInPage.this, MainActivity.class);
                         startActivity(myIntent);
                         finish();
 
-
                     } else {
+                        progressDialog.dismiss(); // Hide loading if login failed
+
                         new AlertDialog.Builder(SignInPage.this)
-                                .setTitle("Check Again!")
-                                .setMessage("Invalid password or email")
-                                .setNegativeButton("Thank You!", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                    }
-                                })
+                                .setTitle("Server response")
+                                .setMessage(""+response)
+                                .setNegativeButton("Thank You!", (dialog, which) -> dialog.dismiss())
                                 .show();
                     }
 
-
                 },
                 error -> {
-                    // Handle error
+                    progressDialog.dismiss(); // Hide loading on error
                     Toast.makeText(this, "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
                 }) {
 
             @Nullable
             @Override
-            protected java.util.Map<String, String> getParams() throws AuthFailureError {
-
+            protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> mymap = new HashMap<>();
-
                 mymap.put("mail", Encyption.EncryptData(mail));
                 mymap.put("pass", Encyption.EncryptData(pass));
                 mymap.put("key", Encyption.Mykey);
-
                 return mymap;
             }
         };
 
         requestQueue.add(postRequest);
     }
+
+    private void setForgetpass(String mail) {
+
+        String url = "http://192.168.1.106/SIU/forgetpass.php";
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+
+        // Create a ProgressDialog
+        ProgressDialog progressDialog = new ProgressDialog(SignInPage.this);
+        progressDialog.setMessage("Loading...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
+        StringRequest postRequest = new StringRequest(Request.Method.POST, url,
+                response -> {
+                    progressDialog.dismiss();
+
+                    if (response.contains("OTP sent")) {
+
+                        Toast.makeText(SignInPage.this, "OTP sent!", Toast.LENGTH_SHORT).show();
+
+                        Intent nextActivity = new Intent(SignInPage.this,SignupPage.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("VAL", 111);
+                        bundle.putString("mail",mail);
+                        nextActivity.putExtras(bundle);
+                        startActivity(nextActivity);
+
+
+                    } else {
+                        new AlertDialog.Builder(SignInPage.this)
+                                .setTitle("Server response")
+                                .setMessage(""+response)
+                                .setNegativeButton("Thank You!", (dialog, which) -> dialog.dismiss())
+                                .show();
+                    }
+
+
+                },
+                error -> {
+                    progressDialog.dismiss(); // Hide loading on error
+                    Toast.makeText(this, "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                }) {
+
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> mymap = new HashMap<>();
+                mymap.put("mail", Encyption.EncryptData(mail));
+                return mymap;
+            }
+        };
+
+        requestQueue.add(postRequest);
+    }
+
 
 }

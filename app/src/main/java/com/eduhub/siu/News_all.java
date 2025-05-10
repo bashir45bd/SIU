@@ -6,18 +6,22 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -27,7 +31,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -65,24 +71,40 @@ import java.util.Locale;
 
 public class News_all extends AppCompatActivity {
 
-    RelativeLayout event,notice,epayment,result,vc;
+    RelativeLayout event,notice,epayment,result,vc,result_sheet;
     ImageView eventback,noticeback,newsback,resultback,vcback;
+    LinearLayout inputpage;
+    TextView fgpa;
    // TabLayout tabLayout;
    // ViewPager2 viewPager;
   //  private Handler sliderHandler;
-    RecyclerView vc_recyclerView,notice_list,news_list;
-    ExtendedFloatingActionButton notice_fav,event_fav;
+    RecyclerView vc_recyclerView,notice_list,news_list,grade_list;
+    ExtendedFloatingActionButton notice_fav,event_fav,reslut_fav;
 
-    TextInputEditText title,n_body,news_search,notice_search;
+    TextInputEditText title,n_body,rollR,subR,cRoll,depR,semR;
     ImageView n_image,select_image;
     String imageBase64;
-    Button n_btn;
+    Button n_btn,submin_btn,c_btn,delete_btn;
+    SearchView searchView_notice,news_search;
+    AutoCompleteTextView cDep,cSem;
 
-    HashMap<String,String> hashMap,notice_map,news_map;
+    HashMap<String,String> hashMap;
     ArrayList< HashMap<String,String> > arrayList = new ArrayList<>();
-    ArrayList< HashMap<String,String> > arrayList1 = new ArrayList<>();
-    ArrayList< HashMap<String,String> > arrayList2 = new ArrayList<>();
+    ArrayList< HashMap<String,String> > result_list = new ArrayList<>();
+    ArrayList< HashMap<String,String> > arrayList_event = new ArrayList<>();
+    news_list adapter6 = new news_list(arrayList_event);
+    ArrayList< HashMap<String,String> > arrayList_notice = new ArrayList<>();
+    notice_list adapter = new notice_list(arrayList_notice);
+    String g_roll="";
+    String g_dep="";
+    String g_sem="";
+
+
+    String[] options = {"CSE", "ECE", "LAW", "ENG","BBA"};
+    String[] semester = {"1st", "2nd", "3rd", "4th","5th","6th", "7th","8th"};
+
     SharedPreferences sharedPreferences;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,25 +112,41 @@ public class News_all extends AppCompatActivity {
         setContentView(R.layout.activity_news_all);
 
         event=findViewById(R.id.event1);
+        fgpa=findViewById(R.id.fGPA);
+        searchView_notice=findViewById(R.id.searchView_notice);
         notice=findViewById(R.id.notice1);
         epayment=findViewById(R.id.epayment);
         result=findViewById(R.id.result);
-  //      tabLayout = findViewById(R.id.tab_layout);
-  //      viewPager = findViewById(R.id.view_pager);
+        c_btn=findViewById(R.id.c_btn);
+        cRoll=findViewById(R.id.cRoll);
+        cSem=findViewById(R.id.cSemester);
+        cDep=findViewById(R.id.cDepartment);
+        result_sheet = findViewById(R.id.result_sheet);
+        inputpage = findViewById(R.id.inputpage);
         eventback=findViewById(R.id.eventback);
         noticeback=findViewById(R.id.noticeback);
-        notice_search=findViewById(R.id.notice_search);
-        news_search=findViewById(R.id.news_search);
+        reslut_fav=findViewById(R.id.result_fav);
+        news_search=findViewById(R.id.searchView_event);
         newsback=findViewById(R.id.newsback);
         resultback=findViewById(R.id.resultback);
         vcback=findViewById(R.id.vcback);
         vc=findViewById(R.id.vc);
         vc_recyclerView=findViewById(R.id.vc_list);
         notice_list=findViewById(R.id.notice_list);
+        grade_list=findViewById(R.id.grade_list);
         news_list=findViewById(R.id.news_list);
         notice_fav=findViewById(R.id.notice_fav);
         event_fav=findViewById(R.id.event_fav);
 
+        EditText searchEditText = searchView_notice.findViewById(androidx.appcompat.R.id.search_src_text);
+        searchEditText.setTextColor(Color.parseColor("#009fb5"));
+        searchEditText.setHintTextColor(Color.GRAY);
+        EditText searchEditText2 = news_search.findViewById(androidx.appcompat.R.id.search_src_text);
+        searchEditText2.setTextColor(Color.parseColor("#009fb5"));
+        searchEditText2.setHintTextColor(Color.GRAY);
+
+        sharedPreferences=getSharedPreferences("siu",MODE_PRIVATE);
+        String types= sharedPreferences.getString("user_type","");
 
         Bundle bun=getIntent().getExtras();
         int val =bun.getInt("VAL");
@@ -119,29 +157,20 @@ public class News_all extends AppCompatActivity {
 
             ArrayRequestforevent();
 
-
-// TextWatcher for search input
-            news_search.addTextChangedListener(new TextWatcher() {
+            // SearchView logic
+            news_search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                 @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    String key1 = s.toString().trim(); // Fix: Use s.toString() directly
-                    if (!key1.isEmpty()) {
-                        search_news(key1);
-                    }
+                public boolean onQueryTextSubmit(String query) {
+                    return false;
                 }
 
                 @Override
-                public void afterTextChanged(Editable s) {
-
+                public boolean onQueryTextChange(String newText) {
+                    filterList2(newText);
+                    return true;
                 }
             });
 
-
-            sharedPreferences=getSharedPreferences("siu",MODE_PRIVATE);
-            String types= sharedPreferences.getString("user_type","");
 
             if (types.contains("teacher")){
 
@@ -170,20 +199,34 @@ public class News_all extends AppCompatActivity {
 
             ArrayRequest();
 
+            // SearchView logic
+            searchView_notice.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    return false;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    filterList(newText);
+                    return true;
+                }
+            });
+
+
+
+
+
+            if (types.contains("teacher")){
+                notice_fav.setVisibility(View.VISIBLE);
+            }
+
 
             notice_fav.setOnClickListener(view -> {
 
-              add_notice(News_all.this);
+                add_notice(News_all.this);
 
             });
-
-            sharedPreferences=getSharedPreferences("siu",MODE_PRIVATE);
-            String types= sharedPreferences.getString("user_type","");
-
-            if (types.contains("teacher")){
-
-                notice_fav.setVisibility(View.VISIBLE);
-            }
 
 
 //===========================silder=======================================
@@ -235,16 +278,49 @@ public class News_all extends AppCompatActivity {
             });
 
         }
+
         else if(val==14) {
+
             result.setVisibility(View.VISIBLE);
+            reslut_fav.setVisibility(View.GONE);
 
-
-
-
+            ArrayAdapter<String> adapter3 = new ArrayAdapter<>(News_all.this, android.R.layout.simple_dropdown_item_1line, semester);
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(News_all.this, android.R.layout.simple_dropdown_item_1line, options);
+            cDep.setAdapter(adapter);
+            cSem.setAdapter(adapter3);
 
             resultback.setOnClickListener(v -> {
                 onBackPressed();
             });
+
+            if (types.contains("teacher")){
+                reslut_fav.setVisibility(View.VISIBLE);
+            }
+
+            c_btn.setOnClickListener(view -> {
+
+             inputpage.setVisibility(View.GONE);
+             result_sheet.setVisibility(View.VISIBLE);
+             fetchResult(News_all.this);
+
+            });
+
+
+
+
+
+
+            reslut_fav.setOnClickListener(view -> {
+
+
+                add_result(News_all.this);
+
+            });
+
+
+
+
+
         }
         else if(val==15) {
 
@@ -298,10 +374,6 @@ public class News_all extends AppCompatActivity {
 
 
         }
-
-
-
-
 
 
 
@@ -451,96 +523,62 @@ public class News_all extends AppCompatActivity {
 //        }
 //    }
 
-
-    private class notice_list extends RecyclerView.Adapter<notice_list.viewholder>{
+    private class Grade_adpter extends RecyclerView.Adapter<Grade_adpter.viewholder>{
 
 
         private class viewholder extends RecyclerView.ViewHolder{
 
-            ImageView notice_pic;
-            LinearLayout notice_item;
-            TextView notice_title,all_notice,time;
+
+            TextView name,code,gpa,grade;
+            LinearLayout grade_item;
+
 
 
             public viewholder(@NonNull View itemView) {
                 super(itemView);
-                notice_item=itemView.findViewById(R.id.notice_item);
-                notice_pic=itemView.findViewById(R.id.notice_pic);
-                notice_title=itemView.findViewById(R.id.notice_title);
-                all_notice=itemView.findViewById(R.id.all_notice);
-                time=itemView.findViewById(R.id.notice_time);
-
+                name=itemView.findViewById(R.id.name);
+                code=itemView.findViewById(R.id.code);
+                grade=itemView.findViewById(R.id.grade);
+                gpa=itemView.findViewById(R.id.gpa);
+                grade_item=itemView.findViewById(R.id.grade_item);
 
             }
         }
 
         @NonNull
         @Override
-        public viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        public Grade_adpter.viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = getLayoutInflater();
-            View view = layoutInflater.inflate(R.layout.notice_card, parent, false);
+            View view = layoutInflater.inflate(R.layout.resultshow, parent, false);
 
-            return new notice_list.viewholder(view);
+            return new Grade_adpter.viewholder(view);
         }
 
 
         @Override
-        public void onBindViewHolder(@NonNull viewholder holder, int position) {
+        public void onBindViewHolder(@NonNull Grade_adpter.viewholder holder, int position) {
 
-            HashMap<String,String>hashMap=arrayList1.get(position);
-            String id = hashMap.get("id");
-            String title = hashMap.get("title");
-            String all_notice = hashMap.get("all_notice");
-            String pic = hashMap.get("pic");
-            String time = hashMap.get("s_time");
+            HashMap<String,String> hashMap=result_list.get(position);
+            String fcode = hashMap.get("subject_code");
+            String fname = hashMap.get("subject_name");
+            String fgpa = hashMap.get("grade_point");
+            String fgrade = hashMap.get("letter_grade");
 
+            holder.name.setText(fname);
+            holder.code.setText(fcode);
+            holder.grade.setText(fgrade);
+            holder.gpa.setText(fgpa);
 
-            holder.notice_title.setText(title);
-            holder.all_notice.setText(all_notice);
+            sharedPreferences=getSharedPreferences("siu",MODE_PRIVATE);
+            String types= sharedPreferences.getString("user_type","");
+            if (types.contains("teacher")){
 
-            double a_time = Double.parseDouble(time);
-            SimpleDateFormat simpletimeFormat = new SimpleDateFormat("hh:mm a", Locale.getDefault());
-            SimpleDateFormat simpledateFormat = new SimpleDateFormat("dd MMM yyyy ", Locale.getDefault());
+                holder.grade_item.setOnClickListener(view -> {
 
-            String stime = simpletimeFormat.format(a_time);
-            String date = simpledateFormat.format(a_time);
-            holder.time.setText(stime+" - "+date);
+                    update_result_layout(News_all.this,fcode);
 
-            Picasso.get()
-                    .load(""+pic)
-                    .placeholder(R.drawable.placeholder)
-                    .error(R.drawable.placeholder)
-                    .into(holder.notice_pic);
-
-            holder.notice_item.setOnClickListener(v -> {
-
-
-
-                Map.notice=all_notice;
-                Bitmap bitmap1 = ((BitmapDrawable) holder.notice_pic.getDrawable()).getBitmap();
-                Map.notice_pic1=bitmap1;
-
-                Intent nextActivity = new Intent(News_all.this, Map.class);
-                Bundle bundle = new Bundle();
-                bundle.putInt("VAL", 43);
-                bundle.putString("id", id);
-                bundle.putString("title", title);
-                bundle.putString("body", all_notice);
-                bundle.putString("image", pic);
-                nextActivity.putExtras(bundle);
-                startActivity(nextActivity);
-
-            });
-
-//            double a_time = Double.parseDouble(f_time);
-//            SimpleDateFormat simpletimeFormat = new SimpleDateFormat("hh:mm a", Locale.getDefault());
-//            SimpleDateFormat simpledateFormat = new SimpleDateFormat("dd MMM yyyy ", Locale.getDefault());
-//
-//            String stime = simpletimeFormat.format(a_time);
-//            String date = simpledateFormat.format(a_time);
-
-
-
+                });
+            }
 
 
 
@@ -548,7 +586,7 @@ public class News_all extends AppCompatActivity {
 
         @Override
         public int getItemCount() {
-            return arrayList1.size();
+            return result_list.size();
         }
 
 
@@ -557,7 +595,111 @@ public class News_all extends AppCompatActivity {
 
     }
 
+    private class notice_list extends RecyclerView.Adapter<notice_list.viewholder> {
+
+        ArrayList<HashMap<String, String>> arrayList1;
+
+        public notice_list(ArrayList<HashMap<String, String>> arrayList1) {
+            this.arrayList1 = arrayList1;
+        }
+
+        public void setFilteredList(ArrayList<HashMap<String, String>> filteredList) {
+            this.arrayList1 = filteredList;
+            notifyDataSetChanged();
+        }
+
+        private class viewholder extends RecyclerView.ViewHolder {
+
+            ImageView notice_pic;
+            LinearLayout notice_item;
+            TextView notice_title, all_notice, time;
+
+            public viewholder(@NonNull View itemView) {
+                super(itemView);
+                notice_item = itemView.findViewById(R.id.notice_item);
+                notice_pic = itemView.findViewById(R.id.notice_pic);
+                notice_title = itemView.findViewById(R.id.notice_title);
+                all_notice = itemView.findViewById(R.id.all_notice);
+                time = itemView.findViewById(R.id.notice_time);
+            }
+        }
+
+        @NonNull
+        @Override
+        public viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+            View view = layoutInflater.inflate(R.layout.notice_card, parent, false);
+            return new viewholder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull viewholder holder, int position) {
+
+            HashMap<String, String> hashMap = arrayList1.get(position);
+            String id = hashMap.get("id");
+            String title = hashMap.get("title");
+            String all_notice = hashMap.get("all_notice");
+            String pic = hashMap.get("pic");
+            String time = hashMap.get("s_time");
+
+            holder.notice_title.setText(title);
+            holder.all_notice.setText(all_notice);
+
+            try {
+                double a_time = Double.parseDouble(time);
+                SimpleDateFormat simpletimeFormat = new SimpleDateFormat("hh:mm a", Locale.getDefault());
+                SimpleDateFormat simpledateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
+
+                String stime = simpletimeFormat.format(a_time);
+                String date = simpledateFormat.format(a_time);
+                holder.time.setText(stime + " - " + date);
+            } catch (Exception e) {
+                holder.time.setText("Invalid date");
+            }
+
+            Picasso.get()
+                    .load(pic)
+                    .placeholder(R.drawable.placeholder)
+                    .error(R.drawable.placeholder)
+                    .into(holder.notice_pic);
+
+            holder.notice_item.setOnClickListener(v -> {
+                Map.notice = all_notice;
+                Bitmap bitmap1 = ((BitmapDrawable) holder.notice_pic.getDrawable()).getBitmap();
+                Map.notice_pic1 = bitmap1;
+
+                Intent nextActivity = new Intent(v.getContext(), Map.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("VAL", 43);
+                bundle.putString("id", id);
+                bundle.putString("title", title);
+                bundle.putString("body", all_notice);
+                bundle.putString("image", pic);
+                nextActivity.putExtras(bundle);
+                v.getContext().startActivity(nextActivity);
+            });
+        }
+
+        @Override
+        public int getItemCount() {
+            return arrayList1.size();
+        }
+    }
+
+
     private class news_list extends RecyclerView.Adapter<news_list.viewholder1>{
+
+
+        ArrayList<HashMap<String, String>> arrayList2;
+
+        public news_list(ArrayList<HashMap<String, String>> arrayList1) {
+            this.arrayList2 = arrayList1;
+        }
+
+        public void setFilteredList(ArrayList<HashMap<String, String>> filteredList) {
+            this.arrayList2 = filteredList;
+            notifyDataSetChanged();
+        }
 
 
         private class viewholder1 extends RecyclerView.ViewHolder{
@@ -656,7 +798,7 @@ public class News_all extends AppCompatActivity {
     private void String_Request(String title,String n_body, String n_image){
 
 
-        String url = "http://192.168.1.104/SIU/notice.php";
+        String url = "http://192.168.1.106/SIU/notice.php";
 
         if (n_image == null || n_image.isEmpty()) {
             n_image = "";
@@ -708,16 +850,13 @@ public class News_all extends AppCompatActivity {
             @Nullable
             @Override
             protected java.util.Map<String, String> getParams() throws AuthFailureError {
-
                 java.util.Map<String, String> map = new HashMap<>();
-
                 map.put("title", title);
                 map.put("n_image", finalN_image);
                 map.put("n_body", n_body);
                 map.put("type", "notice");
                 map.put("time", String.valueOf(System.currentTimeMillis()));
                 map.put("key",Encyption.Mykey);
-
                 return map;
             }
         };
@@ -728,7 +867,7 @@ public class News_all extends AppCompatActivity {
     private void String_Requestforevent(String title,String n_body, String n_image){
 
 
-        String url = "http://192.168.1.104/SIU/notice.php";
+        String url = "http://192.168.1.106/SIU/notice.php";
 
         if (n_image == null || n_image.isEmpty()) {
             n_image = "";
@@ -800,8 +939,6 @@ public class News_all extends AppCompatActivity {
     private void add_notice(Context context) {
 
         BottomSheetDialog dialog = new BottomSheetDialog(this);
-
-
         View view = getLayoutInflater().inflate(R.layout.add_notice, null);
         dialog.setContentView(view);
         n_image=view.findViewById(R.id.n_image);
@@ -852,10 +989,6 @@ public class News_all extends AppCompatActivity {
 
 
         });
-
-
-
-
 
 
         dialog.show();
@@ -926,6 +1059,30 @@ public class News_all extends AppCompatActivity {
 
     }
 
+    private void add_result(Context context) {
+
+        BottomSheetDialog dialog = new BottomSheetDialog(this);
+        View view = getLayoutInflater().inflate(R.layout.add_result, null);
+        dialog.setContentView(view);
+        rollR=view.findViewById(R.id.editRoll);
+        depR=view.findViewById(R.id.g_dep);
+        semR=view.findViewById(R.id.g_sem);
+        subR=view.findViewById(R.id.editSubject);
+        submin_btn=view.findViewById(R.id.submit_btn);
+
+
+
+
+        submin_btn.setOnClickListener(view1 -> {
+
+         submitResult(News_all.this);
+
+        });
+
+
+        dialog.show();
+
+    }
 
 
     @Override
@@ -970,7 +1127,7 @@ public class News_all extends AppCompatActivity {
 
 
     private void ArrayRequest() {
-        String url = "http://192.168.1.104/SIU/notice_get.php"; // Update with actual URL
+        String url = "http://192.168.1.106/SIU/notice_get.php"; // Update with actual URL
 
         // Create JSON payload
         JSONObject jsonRequest = new JSONObject();
@@ -1000,12 +1157,11 @@ public class News_all extends AppCompatActivity {
                                     noticeMap.put("all_notice", object.getString("notice_body"));
                                     noticeMap.put("s_time",object.getString("time"));
                                     noticeMap.put("pic", object.getString("n_image"));
-
-                                    arrayList1.add(noticeMap);
+                                    arrayList_notice.add(noticeMap);
                                 }
 
-                                if (!arrayList1.isEmpty()) {
-                                    notice_list adapter = new notice_list();
+                                if (!arrayList_notice.isEmpty()) {
+
                                     notice_list.setAdapter(adapter);
                                     notice_list.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
                                 }
@@ -1032,7 +1188,7 @@ public class News_all extends AppCompatActivity {
     }
 
     private void ArrayRequestforevent() {
-        String url = "http://192.168.1.104/SIU/notice_get.php"; // Update with actual URL
+        String url = "http://192.168.1.106/SIU/notice_get.php"; // Update with actual URL
 
         // Create JSON payload
         JSONObject jsonRequest = new JSONObject();
@@ -1063,11 +1219,11 @@ public class News_all extends AppCompatActivity {
                                     noticeMap2.put("s_time",object.getString("time"));
                                     noticeMap2.put("pic", object.getString("n_image"));
 
-                                    arrayList2.add(noticeMap2);
+                                    arrayList_event.add(noticeMap2);
                                 }
 
-                                if (!arrayList2.isEmpty()) {
-                                    news_list adapter6 = new news_list();
+                                if (!arrayList_event.isEmpty()) {
+
                                     news_list.setAdapter(adapter6);
                                     news_list.setLayoutManager(new LinearLayoutManager(News_all.this));
                                 }
@@ -1093,70 +1249,412 @@ public class News_all extends AppCompatActivity {
         requestQueue.add(jsonObjectRequest);
     }
 
-    private void search_news(String data) {
-        String url = "http://192.168.1.104/SIU/search.php"; // Update with actual URL
+    private void filterList(String newText) {
 
-        JSONObject jsonRequest = new JSONObject();
-        try {
-            jsonRequest.put("key", Encyption.Mykey);
-            jsonRequest.put("search", data);
-        } catch (JSONException e) {
-            e.printStackTrace();
+        ArrayList<HashMap<String, String>> filteredList = new ArrayList<>();
+        for (HashMap<String, String> item : arrayList_notice) {
+            if (item.get("title").toLowerCase().contains(newText.toLowerCase())) {
+                filteredList.add(item);
+            }
         }
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-                Request.Method.POST, url, jsonRequest,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            news_list.setVisibility(View.VISIBLE);
-
-                            JSONArray noticesArray = response.getJSONArray("notices");
-
-                            for (int x = 0; x < noticesArray.length(); x++) {
-                                JSONObject object = noticesArray.getJSONObject(x);
-
-                                // Filter data by "types"
-                                if (object.has("type") && object.getString("type").equals("event")) {
-                                    HashMap<String, String> noticeMap2 = new HashMap<>();
-                                    noticeMap2.put("id", object.getString("id"));
-                                    noticeMap2.put("title", object.getString("title"));
-                                    noticeMap2.put("all_notice", object.getString("notice_body"));
-                                    noticeMap2.put("s_time", object.getString("time"));
-                                    noticeMap2.put("pic", object.getString("n_image"));
-
-                                    arrayList2.add(noticeMap2);
-                                }
-                            }
-
-                            // Update UI
-                            if (!arrayList2.isEmpty()) {
-                                news_list adapter6 = new news_list();
-                                news_list.setAdapter(adapter6);
-                                news_list.setLayoutManager(new LinearLayoutManager(News_all.this));
-                            } else {
-                                news_list.setVisibility(View.GONE);
-                                Toast.makeText(getApplicationContext(), "No event notices found!", Toast.LENGTH_SHORT).show();
-                            }
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            Toast.makeText(getApplicationContext(), "JSON Parsing Error", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.e("Volley Error", "Error: " + error.getMessage());
-                        Toast.makeText(getApplicationContext(), "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(jsonObjectRequest);
+        if (filteredList.isEmpty()) {
+            Toast.makeText(this, "No Data Found", Toast.LENGTH_SHORT).show();
+        }
+        adapter.setFilteredList(filteredList);
     }
+
+
+    private void filterList2(String newText) {
+
+        ArrayList<HashMap<String, String>> filteredList2 = new ArrayList<>();
+        for (HashMap<String, String> item : arrayList_event) {
+            if (item.get("title").toLowerCase().contains(newText.toLowerCase())) {
+                filteredList2.add(item);
+            }
+        }
+
+        if (filteredList2.isEmpty()) {
+            Toast.makeText(this, "No Data Found", Toast.LENGTH_SHORT).show();
+        }
+        adapter6.setFilteredList(filteredList2);
+    }
+
+
+    private void submitResult(Context context) {
+        String insertUrl = "http://192.168.1.106/SIU/addresult.php";
+
+        String roll = rollR.getText().toString().trim();
+        String dept = depR.getText().toString().trim();
+        String semester = semR.getText().toString().trim();
+        String subjectLines = subR.getText().toString().trim();
+
+        if (roll.isEmpty() || dept.isEmpty() || semester.isEmpty() || subjectLines.isEmpty()) {
+            new AlertDialog.Builder(context)
+                    .setTitle("Missing Info")
+                    .setMessage("Please fill in all fields.")
+                    .setPositiveButton("OK", (dialog, which) -> dialog.dismiss())
+                    .show();
+            return;
+        }
+
+        try {
+            JSONArray resultArray = new JSONArray();
+            String[] lines = subjectLines.split("\n");
+
+            for (String line : lines) {
+                String[] parts = line.trim().split(" ");
+                if (parts.length == 2) {
+                    JSONObject obj = new JSONObject();
+                    obj.put("subject_code", parts[0]);
+                    obj.put("grade_point", parts[1]);
+                    resultArray.put(obj);
+                }
+            }
+
+            RequestQueue queue = Volley.newRequestQueue(context);
+
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, insertUrl,
+                    response -> {
+                        try {
+                            JSONObject res = new JSONObject(response);
+                            String status = res.getString("status");
+
+                            if (status.equals("success")) {
+
+                                new AlertDialog.Builder(context)
+                                        .setTitle("Success")
+                                        .setMessage("Results submitted.")
+                                        .setPositiveButton("OK", null)
+                                        .show();
+                            } else {
+                                String message = res.getString("message");
+                                new AlertDialog.Builder(context)
+                                        .setTitle("Failed")
+                                        .setMessage(message)
+                                        .setNegativeButton("Close", null)
+                                        .show();
+                            }
+                        } catch (JSONException e) {
+                            Toast.makeText(context, "Invalid response from server", Toast.LENGTH_SHORT).show();
+                        }
+                    },
+                    error -> Toast.makeText(context, "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show()) {
+
+                @Nullable
+                @Override
+                protected java.util.Map<String, String> getParams() throws AuthFailureError {
+                    java.util.Map<String, String> map = new HashMap<>();
+                    map.put("roll", roll);
+                    map.put("department", dept);
+                    map.put("semester_id", semester);
+                    map.put("results", resultArray.toString());
+                    map.put("key", Encyption.Mykey);
+                    return map;
+                }
+            };
+
+            queue.add(stringRequest);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(context, "Error processing input", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    private void fetchResult(Context context) {
+
+        String url = "http://192.168.1.106/SIU/getResult.php";
+
+        // Create a ProgressDialog
+        ProgressDialog progressDialog = new ProgressDialog(News_all.this);
+        progressDialog.setMessage("Loading...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
+        String roll = cRoll.getText().toString().trim();
+        String dept = cDep.getText().toString().trim();
+        String semester = cSem.getText().toString().trim();
+
+        if (roll.isEmpty() || dept.isEmpty() || semester.isEmpty()) {
+            new AlertDialog.Builder(context)
+                    .setTitle("Missing Info")
+                    .setMessage("Please fill in all fields.")
+                    .setPositiveButton("OK", (dialog, which) -> dialog.dismiss())
+                    .show();
+                    progressDialog.dismiss();
+
+        }else {
+            RequestQueue queue = Volley.newRequestQueue(this);
+
+
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                    response -> {
+                        progressDialog.dismiss();
+                        try {
+                            JSONObject json = new JSONObject(response);
+                            if (json.getString("status").equals("success")) {
+                                JSONArray results = json.getJSONArray("results");
+
+
+                                for (int i = 0; i < results.length(); i++) {
+
+                                    JSONObject obj = results.getJSONObject(i);
+                                    HashMap<String, String> Rmap = new HashMap<>();
+                                    Rmap.put("subject_code", obj.getString("subject_code"));
+                                    Rmap.put("subject_name", obj.getString("subject_name"));
+                                    Rmap.put("grade_point", obj.getString("grade_point"));
+                                    Rmap.put("letter_grade", obj.getString("letter_grade"));
+                                    result_list.add(Rmap);
+
+                                }
+                                String cgpa = json.getString("cgpa");
+                                fgpa.setText("Your GPA is: " + cgpa);
+
+                                Grade_adpter adapter9 = new Grade_adpter();
+                                grade_list.setAdapter(adapter9);
+                                grade_list.setLayoutManager(new LinearLayoutManager(News_all.this));
+
+                                g_roll=roll;
+                                g_dep=dept;
+                                g_sem=semester;
+
+
+                            } else {
+                                Toast.makeText(this, "No result found", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            Toast.makeText(this, "No result found", Toast.LENGTH_SHORT).show();
+                        }
+                    },
+
+                    error -> Toast.makeText(this, "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show()) {
+
+                @Nullable
+                @Override
+                protected java.util.Map<String, String> getParams() throws AuthFailureError {
+                    java.util.Map<String, String> map = new HashMap<>();
+                    map.put("roll", roll);
+                    map.put("department", dept);
+                    map.put("semester_id", semester);
+                    map.put("key", Encyption.Mykey);
+                    return map;
+                }
+            };
+
+            queue.add(stringRequest);
+
+        }
+
+
+    }
+
+
+    private void update_result_layout(Context context, String code) {
+
+        BottomSheetDialog dialog = new BottomSheetDialog(this);
+        View view = getLayoutInflater().inflate(R.layout.add_result, null);
+        dialog.setContentView(view);
+        rollR=view.findViewById(R.id.editRoll);
+        depR=view.findViewById(R.id.g_dep);
+        semR=view.findViewById(R.id.g_sem);
+        subR=view.findViewById(R.id.editSubject);
+        submin_btn=view.findViewById(R.id.submit_btn);
+        delete_btn=view.findViewById(R.id.delete_btn);
+        delete_btn.setVisibility(View.VISIBLE);
+        submin_btn.setText("Update");
+        rollR.setText(g_roll);
+        depR.setText(g_dep);
+        subR.setText(code);
+        semR.setText(g_sem);
+
+
+
+        submin_btn.setOnClickListener(view1 -> {
+
+            updateResults(News_all.this);
+
+
+        });
+
+        delete_btn.setOnClickListener(view1 -> {
+
+            deleteResults(News_all.this);
+
+        });
+
+
+        dialog.show();
+
+    }
+
+    private void updateResults(Context context) {
+        String updateUrl = "http://192.168.1.106/SIU/updateresult.php";
+
+        String roll = rollR.getText().toString().trim();
+        String dept = depR.getText().toString().trim(); // department_id
+        String semester = semR.getText().toString().trim();
+        String subjectLines = subR.getText().toString().trim();
+
+        if (roll.isEmpty() || dept.isEmpty() || semester.isEmpty() || subjectLines.isEmpty()) {
+            new AlertDialog.Builder(context)
+                    .setTitle("Missing Info")
+                    .setMessage("Please fill in all fields.")
+                    .setPositiveButton("OK", (dialog, which) -> dialog.dismiss())
+                    .show();
+            return;
+        }
+
+        try {
+            JSONArray subjectArray = new JSONArray();
+            String[] lines = subjectLines.split("\n");
+
+            for (String line : lines) {
+                String[] parts = line.trim().split(" ");
+                if (parts.length == 2) {
+                    JSONObject obj = new JSONObject();
+                    obj.put("subject_code", parts[0]);
+                    obj.put("grade_point", parts[1]); // Raw marks
+                    subjectArray.put(obj);
+                }
+            }
+
+            RequestQueue queue = Volley.newRequestQueue(context);
+
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, updateUrl,
+                    response -> {
+                        try {
+                            JSONObject res = new JSONObject(response);
+                            String status = res.getString("status");
+
+                            if (status.equals("success")) {
+                                new AlertDialog.Builder(context)
+                                        .setTitle("Success")
+                                        .setMessage("Results updated.")
+                                        .setPositiveButton("OK", null)
+                                        .show();
+                            } else {
+                                String message = res.getString("message");
+                                new AlertDialog.Builder(context)
+                                        .setTitle("Failed")
+                                        .setMessage(message)
+                                        .setNegativeButton("Close", null)
+                                        .show();
+                            }
+                        } catch (JSONException e) {
+                            Toast.makeText(context, "Invalid response from server", Toast.LENGTH_SHORT).show();
+                        }
+                    },
+                    error -> Toast.makeText(context, "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show()) {
+
+                @Nullable
+                @Override
+                protected java.util.Map<String, String> getParams() throws AuthFailureError {
+                    java.util.Map<String, String> map = new HashMap<>();
+                    map.put("roll", roll);
+                    map.put("department_id", dept); // ✅ fixed key
+                    map.put("semester_id", semester);
+                    map.put("subjects", subjectArray.toString()); // ✅ match PHP
+                    map.put("action", "update");
+                    map.put("key", Encyption.Mykey);
+                    return map;
+                }
+            };
+
+            queue.add(stringRequest);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(context, "Error processing input", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void deleteResults(Context context) {
+
+        String deleteUrl = "http://192.168.1.106/SIU/updateresult.php";
+
+        String roll = rollR.getText().toString().trim();
+        String dept = depR.getText().toString().trim();
+        String semester = semR.getText().toString().trim();
+        String subjectLines = subR.getText().toString().trim();
+
+        if (roll.isEmpty() || dept.isEmpty() || semester.isEmpty() || subjectLines.isEmpty()) {
+            new AlertDialog.Builder(context)
+                    .setTitle("Missing Info")
+                    .setMessage("Please fill in all fields.")
+                    .setPositiveButton("OK", (dialog, which) -> dialog.dismiss())
+                    .show();
+            return;
+        }
+
+        try {
+            JSONArray subjectArray = new JSONArray();
+            String[] lines = subjectLines.split("\n");
+
+            for (String line : lines) {
+                String subjectCode = line.trim();
+                if (!subjectCode.isEmpty()) {
+                    JSONObject obj = new JSONObject();
+                    obj.put("subject_code", subjectCode);
+                    subjectArray.put(obj);
+                }
+            }
+
+            RequestQueue queue = Volley.newRequestQueue(context);
+
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, deleteUrl,
+                    response -> {
+                        try {
+                            JSONObject res = new JSONObject(response);
+                            String status = res.getString("status");
+
+                            if (status.equals("success")) {
+                                new AlertDialog.Builder(context)
+                                        .setTitle("Success")
+                                        .setMessage("Results deleted successfully.")
+                                        .setPositiveButton("OK", null)
+                                        .show();
+                            } else {
+                                String message = res.getString("message");
+                                new AlertDialog.Builder(context)
+                                        .setTitle("Failed")
+                                        .setMessage(message)
+                                        .setNegativeButton("Close", null)
+                                        .show();
+                            }
+                        } catch (JSONException e) {
+                            Toast.makeText(context, "Invalid server response", Toast.LENGTH_SHORT).show();
+                        }
+                    },
+                    error -> Toast.makeText(context, "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show()) {
+
+                @Nullable
+                @Override
+                protected java.util.Map<String, String> getParams() {
+                    java.util.Map<String, String> map = new HashMap<>();
+                    map.put("roll", roll);
+                    map.put("department_id", dept);
+                    map.put("semester_id", semester);
+                    map.put("subjects", subjectArray.toString());
+                    map.put("action", "delete");
+                    map.put("key", Encyption.Mykey);
+                    return map;
+                }
+            };
+
+            queue.add(stringRequest);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(context, "Error preparing request", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+
+
 
 
 

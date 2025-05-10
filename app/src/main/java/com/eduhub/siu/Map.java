@@ -53,7 +53,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
     TextView address_copy,show_title,show_des,show_notice;
     LinearLayout address, contact2, mail;
     ImageView detialsback,show_pic,notice_pic,u_image,select_image;
-    CardView c_fb,c_instragram,c_youtube,up_card,de_card;
+    CardView c_fb,c_instragram,c_youtube,up_card2,de_card;
     RelativeLayout mappage,detialspage,noticeshow;
     ExtendedFloatingActionButton fav;
     TextInputEditText u_title,u_body;
@@ -91,7 +91,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         show_pic=findViewById(R.id.show_pic);
         notice_pic=findViewById(R.id.notice_pic2);
         show_title=findViewById(R.id.show_title);
-        up_card=findViewById(R.id.up_card);
+        up_card2=findViewById(R.id.up_card2);
         de_card=findViewById(R.id.de_card);
 
 
@@ -181,38 +181,46 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         else if(val==43) {
 
             noticeshow.setVisibility(View.VISIBLE);
-            up_card.setVisibility(View.GONE);
-            de_card.setVisibility(View.GONE);
+            sharedPreferences=getSharedPreferences("siu",MODE_PRIVATE);
+            String types= sharedPreferences.getString("user_type","");
+            if (types.contains("teacher")){
+
+                up_card2.setVisibility(View.VISIBLE);
+                de_card.setVisibility(View.VISIBLE);
+
+                de_card.setOnClickListener(view -> {
+
+                    new AlertDialog.Builder(Map.this)
+                            .setTitle("Delete!")
+                            .setMessage("Are you sure?")
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    String_RequestFordelete(id);
+                                }
+                            })
+                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    dialogInterface.dismiss();
+                                }
+                            })
+                            .show();
 
 
-            de_card.setOnClickListener(view -> {
+                });
 
-                new AlertDialog.Builder(Map.this)
-                        .setTitle("Delete!")
-                        .setMessage("Are you sure?")
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                String_RequestFordelete(id);
-                            }
-                        })
-                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                dialogInterface.dismiss();
-                            }
-                        })
-                        .show();
+               up_card2.setOnClickListener(view -> {
 
+                   update_data(id,a_title,a_body,a_image);
+               });
+            }
+            else {
 
-            });
+                up_card2.setVisibility(View.GONE);
+                de_card.setVisibility(View.GONE);
+            }
 
-            up_card.setOnClickListener(view -> {
-
-                update_data(id,a_title,a_body,a_image);
-
-
-            });
 
 
             show_notice.setText(notice);
@@ -222,16 +230,6 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
             }
 
 
-        }
-
-
-        sharedPreferences=getSharedPreferences("siu",MODE_PRIVATE);
-        String types= sharedPreferences.getString("user_type","");
-
-        if (types.contains("teacher")){
-
-            up_card.setVisibility(View.VISIBLE);
-            de_card.setVisibility(View.VISIBLE);
         }
 
 
@@ -254,8 +252,6 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
     private void update_data(String id , String title, String body, String image) {
 
         BottomSheetDialog dialog = new BottomSheetDialog(this);
-
-
         View view = getLayoutInflater().inflate(R.layout.add_notice, null);
         dialog.setContentView(view);
         u_image=view.findViewById(R.id.n_image);
@@ -315,10 +311,6 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         });
 
 
-
-
-
-
         dialog.show();
 
     }
@@ -366,7 +358,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
     private void String_Request(String id,String title, String body,String image){
 
 
-        String url = "http://192.168.1.104/SIU/update_notice_event.php";
+        String url = "http://192.168.1.106/SIU/update_notice_event.php";
 
         // If no new image is selected, send an empty string
         if (image == null || image.isEmpty()) {
@@ -437,7 +429,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
     private void String_RequestFordelete(String id){
 
 
-        String url = "http://192.168.1.104/SIU/event_notice_de.php";
+        String url = "http://192.168.1.106/SIU/event_notice_de.php";
 
 
 

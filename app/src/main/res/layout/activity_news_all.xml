@@ -47,42 +47,28 @@
 
         </LinearLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/searchview"
-            style="@style/ThemeOverlay.Material3.AutoCompleteTextView"
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchView_event"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/_43sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginLeft="@dimen/_15sdp"
             android:layout_marginRight="@dimen/_15sdp"
             android:layout_marginBottom="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:hint="Search"
-            app:boxBackgroundColor="@color/white"
+            android:textSize="@dimen/_14ssp"
+            android:padding="@dimen/_5sdp"
             android:layout_below="@+id/eventbar"
-            app:boxCornerRadiusBottomEnd="@dimen/_25sdp"
-            app:boxCornerRadiusBottomStart="@dimen/_25sdp"
-            app:boxCornerRadiusTopEnd="@dimen/_25sdp"
-            app:boxCornerRadiusTopStart="@dimen/_25sdp"
-            app:endIconMode="clear_text"
-            app:startIconDrawable="@drawable/search_24">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/news_search"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:maxLength="25"
-                android:textColor="#0B0A0A"
-                android:textSize="@dimen/_13ssp" />
-
-
-        </com.google.android.material.textfield.TextInputLayout>
+            app:defaultQueryHint="Search"
+            app:iconifiedByDefault="false"
+            android:background="@drawable/searchbg"
+            app:queryBackground="@android:color/white"
+            />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/news_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/searchview"
+            android:layout_below="@+id/searchView_event"
             android:layout_marginBottom="@dimen/_20sdp"
             android:layout_marginLeft="@dimen/_5sdp"
             android:layout_marginRight="@dimen/_5sdp"
@@ -193,38 +179,24 @@
 <!--                        android:background="@color/trans"-->
 <!--                        />-->
 
-
 <!--            </androidx.cardview.widget.CardView>-->
-            <com.google.android.material.textfield.TextInputLayout
 
-                style="@style/ThemeOverlay.Material3.AutoCompleteTextView"
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/searchView_notice"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/_43sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginLeft="@dimen/_15sdp"
                 android:layout_marginRight="@dimen/_15sdp"
-                android:layout_marginBottom="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:hint="Search"
-                app:boxBackgroundColor="@color/white"
-                android:layout_below="@+id/eventbar"
-                app:boxCornerRadiusBottomEnd="@dimen/_25sdp"
-                app:boxCornerRadiusBottomStart="@dimen/_25sdp"
-                app:boxCornerRadiusTopEnd="@dimen/_25sdp"
-                app:boxCornerRadiusTopStart="@dimen/_25sdp"
-                app:endIconMode="clear_text"
-                app:startIconDrawable="@drawable/search_24">
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:textSize="@dimen/_14ssp"
+                android:padding="@dimen/_5sdp"
+                app:defaultQueryHint="Search"
+                app:iconifiedByDefault="false"
+                android:background="@drawable/searchbg"
+                app:queryBackground="@android:color/white"
+               />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/notice_search"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:maxLength="25"
-                    android:textColor="#0B0A0A"
-                    android:textSize="@dimen/_13ssp" />
-
-
-            </com.google.android.material.textfield.TextInputLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/notice_list"
@@ -318,7 +290,7 @@
         android:id="@+id/result"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/bg"
+        android:background="@drawable/resultbg2"
         android:visibility="gone"
         >
         <LinearLayout
@@ -326,42 +298,299 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:orientation="horizontal"
-            android:background="@color/color"
             >
 
             <ImageView
                 android:id="@+id/resultback"
-                android:layout_width="@dimen/_40sdp"
-                android:layout_height="match_parent"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
                 android:layout_gravity="center"
-                android:padding="@dimen/_10sdp"
+                android:padding="@dimen/_9sdp"
+                android:layout_margin="@dimen/_10sdp"
                 android:clickable="true"
+                android:background="@drawable/circle"
                 android:foreground="?attr/selectableItemBackground"
                 android:src="@drawable/back" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:fontFamily="@font/roboto"
-                android:text="Result"
-                android:layout_marginLeft="@dimen/_5sdp"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_17ssp"
-                android:textStyle="bold" />
-
-
         </LinearLayout>
-        <TextView
+
+
+
+        <LinearLayout
+            android:id="@+id/inputpage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_below="@+id/resultbar"
+                android:layout_marginLeft="@dimen/_20ssp"
+                android:layout_marginRight="@dimen/_20ssp"
+                android:visibility="visible"
+
+               >
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Check result"
+                android:textColor="@color/color"
+                android:fontFamily="@font/font"
+                android:layout_marginLeft="@dimen/_8sdp"
+                android:textStyle="bold"
+                android:gravity="start"
+                android:layout_marginTop="@dimen/_110sdp"
+                android:textSize="@dimen/_18ssp"/>
+            <View
+                android:layout_width="@dimen/_106sdp"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_gravity="start"
+                android:layout_marginLeft="@dimen/_14sdp"
+                android:background="@color/color"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/ThemeOverlay.Material3.AutoCompleteTextView"
+                    app:boxBackgroundColor="#FAFAFA"
+                    app:boxCornerRadiusBottomStart="9dp"
+                    app:boxCornerRadiusTopEnd="9dp"
+                    app:boxCornerRadiusTopStart="9dp"
+                    app:boxCornerRadiusBottomEnd="@dimen/_9sdp"
+                    app:endIconMode="clear_text"
+                    app:startIconDrawable="@drawable/person"
+                    app:startIconTint="@color/color"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:hint="Student id"
+                    android:textColorHint="#625E5E"
+
+                    >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/cRoll"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:maxLength="100"
+                        android:textColor="@color/color"
+                        android:textSize="@dimen/_12ssp" />
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    app:boxCornerRadiusBottomStart="9dp"
+                    app:boxCornerRadiusTopEnd="9dp"
+                    app:boxCornerRadiusTopStart="9dp"
+                    app:boxCornerRadiusBottomEnd="@dimen/_9sdp"
+                    app:startIconDrawable="@drawable/signup_dep"
+                    app:startIconTint="@color/color"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:textColorHint="#625E5E"
+                    app:boxBackgroundColor="#FAFAFA"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    >
+
+                    <AutoCompleteTextView
+                        android:id="@+id/cDepartment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="none"
+                        android:textSize="@dimen/_12ssp"
+                        android:fontFamily="@font/roboto"
+                        android:textColor="@color/color"
+                        android:hint="Department" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    app:boxCornerRadiusBottomStart="9dp"
+                    app:boxCornerRadiusTopEnd="9dp"
+                    app:boxCornerRadiusTopStart="9dp"
+                    app:boxCornerRadiusBottomEnd="@dimen/_9sdp"
+                    app:startIconDrawable="@drawable/id"
+                    app:startIconTint="@color/color"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:textColorHint="#625E5E"
+                    app:boxBackgroundColor="#FAFAFA"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    >
+
+                    <AutoCompleteTextView
+                        android:id="@+id/cSemester"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="none"
+                        android:textSize="@dimen/_12ssp"
+                        android:fontFamily="@font/roboto"
+                        android:textColor="@color/color"
+                        android:hint="Semester" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <Button
+                    android:id="@+id/c_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_45sdp"
+                    android:layout_marginTop="30dp"
+                    android:backgroundTint="@color/color"
+                    android:fontFamily="@font/font"
+                    android:gravity="center"
+                    android:text="Cheack"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_16ssp"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/result_sheet"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:background="@color/bg"
+            android:layout_below="@+id/resultbar">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="@dimen/_18ssp"
+                    android:textStyle="bold"
+                    android:textColor="@color/color"
+                    android:layout_marginBottom="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:fontFamily="@font/font"
+                    android:text="Grade sheet"/>
+
+
+                <LinearLayout
+                    android:id="@+id/dd"
+                    android:orientation="horizontal"
+                    android:padding="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/color">
+
+                    <TextView
+                        android:id="@+id/code"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Code"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_12ssp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_weight="2"
+                        android:layout_width="0dp"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_12ssp"
+                        android:textStyle="bold"
+                        android:layout_height="wrap_content"
+                        android:text="Course title"/>
+
+                    <TextView
+                        android:id="@+id/gpa"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_12ssp"
+                        android:textStyle="bold"
+                        android:layout_height="wrap_content"
+                        android:text="Point"/>
+
+                    <TextView
+                        android:id="@+id/grade"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_12ssp"
+                        android:textStyle="bold"
+                        android:layout_height="wrap_content"
+                        android:text="Letter"/>
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/grade_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+
+                <TextView
+                    android:id="@+id/fGPA"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="@dimen/_15ssp"
+                    android:textColor="@color/color"
+                    android:fontFamily="@font/roboto"
+                    android:textStyle="bold"
+                    android:background="@drawable/white_bg"
+                    android:paddingTop="@dimen/_15sdp"
+                    android:paddingBottom="@dimen/_15sdp"
+                    android:text="Your GPA is: ----"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp" />
+
+
+
+
+            </LinearLayout>
+
+
+
+
+
+
+        </RelativeLayout>
+
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/result_fav"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Up Coming"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="@dimen/_15sdp"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:backgroundTint="@color/color"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackground"
+            app:tint="@color/white"
+            app:elevation="@dimen/_10sdp"
+            android:text="Add"
+            app:icon="@drawable/id"
+            app:iconTint="@color/white"
+            android:textColor="@color/white"
             android:textStyle="bold"
-            android:textSize="@dimen/_15ssp"
-            android:textColor="@color/color"/>
+            android:textSize="@dimen/_14ssp"
+            app:iconSize="@dimen/_20sdp"
+            android:fontFamily="@font/roboto"
+            />
+
     </RelativeLayout>
 
     <RelativeLayout

@@ -51,7 +51,7 @@
             android:layout_marginTop="@dimen/_3sdp"
             android:clickable="true"
             android:fontFamily="@font/roboto"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="10dp"
             android:focusable="true" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -90,7 +90,9 @@
             style="@style/ThemeOverlay.Material3.AutoCompleteTextView"
             android:hint="Password"
             android:textColorHint="#625E5E"
-            android:layout_margin="@dimen/_8sdp"
+            android:layout_marginLeft="@dimen/_8sdp"
+            android:layout_marginRight="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_8sdp"
             app:endIconMode="password_toggle"
             app:boxBackgroundColor="#FAFAFA"
             app:startIconDrawable="@drawable/password"
@@ -114,6 +116,21 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <TextView
+            android:id="@+id/forgetpass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Forget Password?"
+            android:textSize="@dimen/_12ssp"
+            android:textColor="#6B6666"
+            android:clickable="true"
+            android:gravity="end"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:layout_marginRight="@dimen/_12sdp"
+            android:foreground="?selectableItemBackground"
+
+            />
+
         <!-- Sign In Button -->
         <Button
             android:id="@+id/btnSignIn"
@@ -128,7 +145,7 @@
             android:textStyle="bold"
             android:layout_marginLeft="@dimen/_8sdp"
             android:layout_marginRight="@dimen/_8sdp"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="25dp" />
 
 
         <LinearLayout

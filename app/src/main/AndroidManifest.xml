@@ -32,16 +32,19 @@
             android:exported="false" />
         <activity
             android:name=".SignupPage"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"/>
         <activity
             android:name=".SignInPage"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"/>
         <activity
             android:name=".Map"
             android:exported="false" />
         <activity
             android:name=".News_all"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"/>
         <activity
             android:name=".Author_all"
             android:exported="false" />

@@ -7,7 +7,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -88,7 +87,7 @@ public class MainActivity extends AppCompatActivity{
         Update_profile= findViewById(R.id.Update_profile);
         tvUserEmail= findViewById(R.id.tvUserEmail);
         tvprofile= findViewById(R.id.tvprofile);
-        lottieAnimationView = findViewById(R.id.lottieAnimation);
+
 
         ConnectivityManager connectivityManager =  (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
@@ -101,24 +100,12 @@ public class MainActivity extends AppCompatActivity{
 
             sharedPreferences=getSharedPreferences("siu",MODE_PRIVATE);
             String email= sharedPreferences.getString("email","");
+
             if (email.length()<=0){
 
-
-                final Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        //Code here
                         Intent myIntent = new Intent(MainActivity.this, SignInPage.class);
                         startActivity(myIntent);
                         finish();
-
-
-
-                    }
-                },1500);
-
 
             }
             else {
@@ -289,6 +276,16 @@ public class MainActivity extends AppCompatActivity{
 
                         Intent intent = new Intent(Intent.ACTION_VIEW);
                         intent.setData(Uri.parse("https://sites.google.com/view/extulprivacy-policy"));
+                        startActivity(intent);
+
+
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                    }
+
+                    else if (item.getItemId()==R.id.website){
+
+                        Intent intent = new Intent(Intent.ACTION_VIEW);
+                        intent.setData(Uri.parse("https://siu.edu.bd/"));
                         startActivity(intent);
 
 
@@ -511,7 +508,7 @@ public class MainActivity extends AppCompatActivity{
 
     private void ObjectRequest() {
 
-        String url = "http://192.168.1.104/SIU/Objectrequest.php"; // Replace with your API URL
+        String url = "http://192.168.1.106/SIU/Objectrequest.php"; // Replace with your API URL
 
         // Creating JSON Object
         JSONObject jsonRequest = new JSONObject();

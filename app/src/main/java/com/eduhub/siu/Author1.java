@@ -180,7 +180,7 @@ public class Author1 extends Fragment {
 
     private void TrustSIUData() {
 
-        String URL = "http://192.168.1.104/SIU/Alldata.json";
+        String URL = "http://192.168.1.106/SIU/Alldata.json";
         RequestQueue queue = Volley.newRequestQueue(getContext());
 
 
