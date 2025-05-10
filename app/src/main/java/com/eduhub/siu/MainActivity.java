@@ -508,7 +508,7 @@ public class MainActivity extends AppCompatActivity{
 
     private void ObjectRequest() {
 
-        String url = "http://192.168.1.106/SIU/Objectrequest.php"; // Replace with your API URL
+        String url = "http://192.168.1.104/SIU/Objectrequest.php"; // Replace with your API URL
 
         // Creating JSON Object
         JSONObject jsonRequest = new JSONObject();

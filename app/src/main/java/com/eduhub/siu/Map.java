@@ -358,7 +358,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
     private void String_Request(String id,String title, String body,String image){
 
 
-        String url = "http://192.168.1.106/SIU/update_notice_event.php";
+        String url = "http://192.168.1.104/SIU/update_notice_event.php";
 
         // If no new image is selected, send an empty string
         if (image == null || image.isEmpty()) {
@@ -429,7 +429,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
     private void String_RequestFordelete(String id){
 
 
-        String url = "http://192.168.1.106/SIU/event_notice_de.php";
+        String url = "http://192.168.1.104/SIU/event_notice_de.php";
 
 
 

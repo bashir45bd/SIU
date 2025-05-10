@@ -187,7 +187,7 @@ public class Author4 extends Fragment {
 
     private void Dici_data() {
 
-        String URL = "http://192.168.1.106/SIU/Alldata.json";
+        String URL = "http://192.168.1.104/SIU/Alldata.json";
         RequestQueue queue = Volley.newRequestQueue(getContext());
 
 

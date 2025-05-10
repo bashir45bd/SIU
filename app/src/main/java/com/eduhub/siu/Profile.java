@@ -146,7 +146,7 @@ public class Profile extends AppCompatActivity {
     private void String_Request(String name,String session, String roll,String reg, String phone, String dep,String mail, String fblink,String bio, String image,String id){
 
 
-        String url = "http://192.168.1.106/SIU/update_info.php";
+        String url = "http://192.168.1.104/SIU/update_info.php";
 
         // If no new image is selected, send an empty string
         if (image == null || image.isEmpty()) {

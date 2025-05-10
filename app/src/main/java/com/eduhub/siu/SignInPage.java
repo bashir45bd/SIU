@@ -97,7 +97,7 @@ public class SignInPage extends AppCompatActivity {
 
 
     private void StringRequest(String mail, String pass) {
-        String url = "http://192.168.1.106/SIU/login.php";
+        String url = "http://192.168.1.104/SIU/login.php";
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
 
@@ -155,7 +155,7 @@ public class SignInPage extends AppCompatActivity {
 
     private void setForgetpass(String mail) {
 
-        String url = "http://192.168.1.106/SIU/forgetpass.php";
+        String url = "http://192.168.1.104/SIU/forgetpass.php";
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
 

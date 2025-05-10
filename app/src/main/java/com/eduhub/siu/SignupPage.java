@@ -253,7 +253,7 @@ public class SignupPage extends AppCompatActivity {
     private void String_Request(String name, String session, String roll, String reg, String phone,
                                 String dep, String mail, String pass, String user_type) {
 
-        String url = "http://192.168.1.106/SIU/SignUp.php";
+        String url = "http://192.168.1.104/SIU/SignUp.php";
         RequestQueue requestQueue = Volley.newRequestQueue(this);
 
         ProgressDialog progressDialog = new ProgressDialog(SignupPage.this);
@@ -313,7 +313,7 @@ public class SignupPage extends AppCompatActivity {
 
     private void String_RequestForteacher(String name, String pos, String phone, String dep, String mail, String pass, String user_type) {
 
-        String url = "http://192.168.1.106/SIU/teacher_signup.php";
+        String url = "http://192.168.1.104/SIU/teacher_signup.php";
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
 
@@ -373,7 +373,7 @@ public class SignupPage extends AppCompatActivity {
 
 
     private void verifyOtpAndReset(String email, String otp, String password) {
-        String url = "http://192.168.1.106/SIU/verifyotp.php";
+        String url = "http://192.168.1.104/SIU/verifyotp.php";
 
         StringRequest request = new StringRequest(Request.Method.POST, url,
                 response -> {

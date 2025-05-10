@@ -798,7 +798,7 @@ public class News_all extends AppCompatActivity {
     private void String_Request(String title,String n_body, String n_image){
 
 
-        String url = "http://192.168.1.106/SIU/notice.php";
+        String url = "http://192.168.1.104/SIU/notice.php";
 
         if (n_image == null || n_image.isEmpty()) {
             n_image = "";
@@ -867,7 +867,7 @@ public class News_all extends AppCompatActivity {
     private void String_Requestforevent(String title,String n_body, String n_image){
 
 
-        String url = "http://192.168.1.106/SIU/notice.php";
+        String url = "http://192.168.1.104/SIU/notice.php";
 
         if (n_image == null || n_image.isEmpty()) {
             n_image = "";
@@ -1127,7 +1127,7 @@ public class News_all extends AppCompatActivity {
 
 
     private void ArrayRequest() {
-        String url = "http://192.168.1.106/SIU/notice_get.php"; // Update with actual URL
+        String url = "http://192.168.1.104/SIU/notice_get.php"; // Update with actual URL
 
         // Create JSON payload
         JSONObject jsonRequest = new JSONObject();
@@ -1188,7 +1188,7 @@ public class News_all extends AppCompatActivity {
     }
 
     private void ArrayRequestforevent() {
-        String url = "http://192.168.1.106/SIU/notice_get.php"; // Update with actual URL
+        String url = "http://192.168.1.104/SIU/notice_get.php"; // Update with actual URL
 
         // Create JSON payload
         JSONObject jsonRequest = new JSONObject();
@@ -1282,7 +1282,7 @@ public class News_all extends AppCompatActivity {
 
 
     private void submitResult(Context context) {
-        String insertUrl = "http://192.168.1.106/SIU/addresult.php";
+        String insertUrl = "http://192.168.1.104/SIU/addresult.php";
 
         String roll = rollR.getText().toString().trim();
         String dept = depR.getText().toString().trim();
@@ -1365,7 +1365,7 @@ public class News_all extends AppCompatActivity {
 
     private void fetchResult(Context context) {
 
-        String url = "http://192.168.1.106/SIU/getResult.php";
+        String url = "http://192.168.1.104/SIU/getResult.php";
 
         // Create a ProgressDialog
         ProgressDialog progressDialog = new ProgressDialog(News_all.this);
@@ -1491,7 +1491,7 @@ public class News_all extends AppCompatActivity {
     }
 
     private void updateResults(Context context) {
-        String updateUrl = "http://192.168.1.106/SIU/updateresult.php";
+        String updateUrl = "http://192.168.1.104/SIU/updateresult.php";
 
         String roll = rollR.getText().toString().trim();
         String dept = depR.getText().toString().trim(); // department_id
@@ -1573,7 +1573,7 @@ public class News_all extends AppCompatActivity {
 
     private void deleteResults(Context context) {
 
-        String deleteUrl = "http://192.168.1.106/SIU/updateresult.php";
+        String deleteUrl = "http://192.168.1.104/SIU/updateresult.php";
 
         String roll = rollR.getText().toString().trim();
         String dept = depR.getText().toString().trim();
