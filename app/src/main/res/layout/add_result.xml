@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/dev_bg"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <View
+        android:id="@+id/aa"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_3sdp"
+        android:background="#5F5F5F"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_centerHorizontal="true"/>
+
+    <LinearLayout
+        android:id="@+id/u_student"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_margin="@dimen/_15ssp"
+        android:visibility="visible">
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/ThemeOverlay.Material3.AutoCompleteTextView"
+            app:boxBackgroundColor="#FAFAFA"
+            app:boxCornerRadiusBottomStart="7dp"
+            app:boxCornerRadiusTopEnd="35dp"
+            app:boxCornerRadiusTopStart="7dp"
+            app:endIconMode="clear_text"
+            app:startIconDrawable="@drawable/person"
+            app:startIconTint="@color/color"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:hint="Student id"
+            android:textColorHint="#625E5E"
+
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editRoll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:maxLength="100"
+                android:textColor="@color/color"
+                android:textSize="@dimen/_12ssp" />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/g_dep_l"
+            style="@style/ThemeOverlay.Material3.AutoCompleteTextView"
+            app:boxBackgroundColor="#FAFAFA"
+            app:boxCornerRadiusBottomStart="7dp"
+            app:boxCornerRadiusTopEnd="35dp"
+            app:boxCornerRadiusTopStart="7dp"
+            app:endIconMode="clear_text"
+            app:startIconDrawable="@drawable/signup_dep"
+            app:startIconTint="@color/color"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:hint="Department"
+            android:textColorHint="#625E5E"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/g_dep"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:maxLength="100"
+                android:textColor="@color/color"
+                android:textSize="@dimen/_12ssp" />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/g_sem_l"
+            style="@style/ThemeOverlay.Material3.AutoCompleteTextView"
+            app:boxBackgroundColor="#FAFAFA"
+            app:boxCornerRadiusBottomStart="7dp"
+            app:boxCornerRadiusTopEnd="35dp"
+            app:boxCornerRadiusTopStart="7dp"
+            app:endIconMode="clear_text"
+            app:startIconDrawable="@drawable/id"
+            app:startIconTint="@color/color"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:hint="Semedter"
+            android:textColorHint="#625E5E"
+
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/g_sem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:maxLength="100"
+                android:textColor="@color/color"
+                android:textSize="@dimen/_12ssp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/ThemeOverlay.Material3.AutoCompleteTextView"
+            app:boxBackgroundColor="#FAFAFA"
+            app:boxCornerRadiusBottomStart="7dp"
+            app:boxCornerRadiusTopEnd="35dp"
+            app:boxCornerRadiusTopStart="7dp"
+            app:endIconMode="clear_text"
+            app:startIconTint="@color/color"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:hint="Enter subjects and marks"
+            android:textColorHint="#625E5E">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editSubject"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_90sdp"
+                android:gravity="top"
+                android:inputType="textMultiLine"
+                android:maxLength="500"
+                android:textColor="@color/color"
+                android:textSize="@dimen/_10ssp" />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <Button
+            android:id="@+id/submit_btn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_45sdp"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="@color/color"
+            android:fontFamily="@font/font"
+            android:gravity="center"
+            android:text="Submit"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_16ssp"
+            android:textStyle="bold" />
+        <Button
+            android:id="@+id/delete_btn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_45sdp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/color"
+            android:fontFamily="@font/font"
+            android:gravity="center"
+            android:text="Delete"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_16ssp"
+            android:visibility="gone"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50sdp" />
+    </LinearLayout>
+
+</RelativeLayout>
